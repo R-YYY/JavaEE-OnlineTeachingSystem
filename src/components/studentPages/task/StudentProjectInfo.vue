@@ -2,7 +2,7 @@
   <div id="projectInfo">
     <div class="title">{{project.name}}</div>
     <div class="backButton">
-      <el-button type="primary" @click="goBack">返回</el-button>
+<!--      <el-button type="primary" @click="goBack">返回</el-button>-->
     </div>
     <div class="end_time">截止时间 : {{project.end_time}}</div>
 
@@ -29,21 +29,22 @@
         <div slot="header" class="clearfix">
           <span style="font-weight: bolder">实验报告 ： </span>
         </div>
-        <el-button type="primary" icon="el-icon-upload2" plain size="medium" style="float: right">上传</el-button>
         <el-upload
             class="upload-demo"
             action="#"
-            ref="upload"
+            ref="projectUploadFile"
             :auto-upload="false"
             :show-file-list="true"
             :http-request="handleUpload"
             :multiple="false"
             :file-list="fileList"
-            :limit="1"
+            :limit="2"
             >
-          <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-
-          <div slot="tip" class="el-upload__tip">只能上传docx/doc文件，且不超过10Mb</div>
+          <el-button slot="trigger" size="medium" type="primary">选取文件</el-button>
+          <div slot="tip" class="el-upload__tip">只能上传docx/doc/pdf文件，且不超过10Mb</div>
+          <el-button type="primary" icon="el-icon-upload2"
+                     plain size="medium" style="float: right;margin-right: 100px"
+                     @click="submit">上传</el-button>
         </el-upload>
       </el-card>
     </div>
@@ -62,44 +63,90 @@ export default {
     };
   },
   methods:{
+    submit(){
+      this.$refs["projectUploadFile"].submit();
+    },
     handleUpload(file) {
       let data = new FormData();
-      console.log(this.course_ID);
-      console.log(this.project.name);
+      // console.log(this.course_ID);
+      // console.log(this.project.name);
       data.append("course_ID", this.course_ID);
       data.append("student_ID", '1951014');
       data.append("project_name", this.project.name);
       data.append("file", file.file);
-      this.$axios({
-        url: "report/add",
-        method: "post",
-        data: data,
-      })
-          .then((response) => {
-            if (response.data === 1) {
-              this.$message({
-                type: "success",
-                message: file.file.name + " 上传成功！",
-              });
-              this.fileList.push({
-                file_name: file.file.name,
-                submit_time: this.getDateYYYYMMddHHMMSS(),
-                file_size: Math.ceil((file.file.size * 10) / 1024) / 10 + " KB",
-              });
-            }
-            else {
+      console.log(file.file);
+      if(this.fileList.length>0){
+        this.$axios({
+          url: "report/update",
+          method: "post",
+          data: data,
+        }).then((response)=>{
+          console.log(response.data);
+          if (response.data === 1) {
+            this.$message({
+              type: "success",
+              message: file.file.name + " 上传成功！",
+            });
+            this.fileList[0].file_name=file.file_name;
+            this.fileList[0].submit_time=this.getDateYYYYMMddHHMMSS();
+            this.fileList[0].file_size=Math.ceil((file.file.size * 10) / 1024) / 10 + " KB";
+          }
+          else {
+            this.$message({
+              type: "error",
+              message: "上传失败！请重试！",
+            });
+          }
+        }).catch(() => {
               this.$message({
                 type: "error",
                 message: "上传失败！请重试！",
               });
-            }
-          })
-          // .catch(() => {
-          //   this.$message({
-          //     type: "error",
-          //     message: "上传失败！请重试！",
-          //   });
-          // });
+            });
+      }
+      else{
+        // 第一次上传报告
+
+        this.$axios({
+          url: "report/add",
+          method: "post",
+          data: data,
+        }).then((response) => {
+              console.log(response.data);
+              if (response.data === 1) {
+                this.$message({
+                  type: "success",
+                  message: file.file.name + " 上传成功！",
+                });
+                this.fileList.push({
+                  file_name: file.file.name,
+                  submit_time: this.getDateYYYYMMddHHMMSS(),
+                  file_size: Math.ceil((file.file.size * 10) / 1024) / 10 + " KB",
+                });
+              }
+              else {
+                this.$message({
+                  type: "error",
+                  message: "上传失败！请重试！",
+                });
+              }
+            })
+            .catch(() => {
+              this.$message({
+                type: "error",
+                message: "上传失败！请重试！",
+              });
+            });
+      }
+    },
+    getDateYYYYMMddHHMMSS() {
+      const date = new Date();
+      const month = (date.getMonth() + 1).toString().padStart(2, "0");
+      const strDate = date.getDate().toString().padStart(2, "0");
+      const starHours = date.getHours().toString().padStart(2, "0");
+      const starMinutes = date.getMinutes().toString().padStart(2, "0");
+      const starSeconds = date.getSeconds().toString().padStart(2, "0");
+      return `${date.getFullYear()}-${month}-${strDate} ${starHours}:${starMinutes}:${starSeconds}`;
     },
     goBack(){
       this.$router.go(-1);

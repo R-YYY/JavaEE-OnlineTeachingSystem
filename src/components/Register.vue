@@ -61,7 +61,7 @@
               placeholder="请输入邮箱"
             ></el-input>
             <!-- 发送验证码 -->
-            <el-button @click="getCode()" style="width: 40%; float: right">
+            <el-button @click="getCode('registerForm')" style="width: 40%; float: right">
               <!-- <el-button
                   @click="getCode()"
                   :disabled="!show"
@@ -128,14 +128,14 @@ export default {
         userid: [
           { required: true, message: "请输入账号", trigger: "blur" },
           {
-            min: 6,
+            min: 5,
             max: 7,
-            message: "长度在 6 到 7 个字符",
+            message: "长度在 5 到 7 个字符",
             trigger: "blur",
           },
           {
             validator: function (rule, value, callback) {
-              if (/(^\d{6,7}$)/.test(value) == false) {
+              if (/(^\d{5,7}$)/.test(value) == false) {
                 callback(new Error("请输入正确的账号"));
               } else {
                 //校验通过
@@ -152,8 +152,8 @@ export default {
           { required: true, message: "请输入邮箱", trigger: "blur" },
           {
             min: 1,
-            max: 20,
-            message: "长度在 1 到 20 个字符",
+            max: 25,
+            message: "长度在 1 到 25 个字符",
             trigger: "blur",
           },
           {
@@ -228,11 +228,11 @@ export default {
       this.$refs.registerForm.resetFields();
     },
     //向邮箱发送验证码
-    getCode() {
+    getCode(registerForm) {
       // console.log("eess6@163.com");
-      if (this.registerForm.email === "") {
-        this.$message.error("请先输入邮箱再点击获取验证码");
-      } else {
+      this.$refs[registerForm].validateField('email',(email_check)=>{
+        if(email_check) return
+        console.log('邮箱验证通过');
         let regemail = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
         if (!regemail.test(this.registerForm.email)) {
           this.$message({
@@ -281,7 +281,7 @@ export default {
               });
             });
         }
-      }
+      })
       console.log("55555"); //执行
       // 验证码倒计时
       if (!this.timer) {
@@ -319,6 +319,7 @@ export default {
                   type: "success",
                   message: "注册成功！",
                 });
+                this.$router.push("/");
               } else {
                 this.$message({
                   type: "error",

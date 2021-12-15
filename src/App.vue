@@ -7,7 +7,7 @@
     <el-button @click="studentCourseHome" :style="{display:isShow}">学生课程主页</el-button>
 
     <!--测试邮箱注册-->
-    <el-form label-width="70px" style="margin-top: 50px">
+    <!-- <el-form label-width="70px" style="margin-top: 50px">
       <el-form-item label="账号" prop="account_ID" style="width: 300px">
         <el-input v-model="account_ID"></el-input>
       </el-form-item>
@@ -22,7 +22,7 @@
         <el-input v-model="code"></el-input>
       </el-form-item>
     </el-form>
-    <el-button style="margin-left: 150px" @click="register">注册</el-button>
+    <el-button style="margin-left: 150px" @click="register">注册</el-button> -->
   </div>
 </template>
 

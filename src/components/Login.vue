@@ -133,15 +133,16 @@ export default {
       })
         .then((response) => {
           console.log("传出的" + response.data);
-          if (response.data !== true)
+          if (response.data === "1")
             this.$message({
               type: "error",
               message: "登录失败",
             });
-          this.$message({
-            type: "success",
-            message: "登录成功",
-          });
+          else
+            this.$message({
+              type: "success",
+              message: "登录成功",
+            });
           window.sessionStorage.setItem("id", response.data.account_ID);
           if (window.sessionStorage.getItem("id").length == 5)
             this.$router.push("/teacherhome");

@@ -3,7 +3,7 @@
     <el-tabs class="stuGradeTab" v-model="activeName" @tab-click="handleClick">
 
       <el-tab-pane name="total">
-        <span slot="label" class="paneName"><i class="el-icon-user-solid"></i> 总成绩</span>
+        <span slot="label" class="paneName"><i class="el-icon-user-solid"></i> 成绩权重</span>
         <TotalGrade v-bind:course_id="course_id"></TotalGrade>
       </el-tab-pane>
 
@@ -13,7 +13,7 @@
       </el-tab-pane>
 
       <el-tab-pane name="attendance">
-        <span slot="label" class="paneName"><i class="el-icon-date"></i> 考勤成绩</span>
+        <span slot="label" class="paneName"><i class="el-icon-date"></i> 总成绩</span>
         <AttendanceGrade v-bind:course_id="course_id"></AttendanceGrade>
       </el-tab-pane>
     </el-tabs>
@@ -21,9 +21,9 @@
 </template>
 
 <script>
-import TotalGrade from "./TotalGrade";
+import TotalGrade from "./GradeWeight";
 import ProjectGrade from "./ProjectGrade";
-import AttendanceGrade from "./AttendanceGrade";
+import AttendanceGrade from "./TotalGrade";
 export default {
   name: "StudentGrade",
   components: {AttendanceGrade, ProjectGrade, TotalGrade},

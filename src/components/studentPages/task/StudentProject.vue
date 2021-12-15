@@ -3,9 +3,9 @@
     <div class="projectCard" v-for="project in project_list">
       <el-descriptions :title="project.name" :column="2">
         <template slot="extra">
-          <el-button type="primary" icon="el-icon-edit" plain id="checkButton" size="medium">
-            <router-link :to="{path:`/stuProjectInfo`,query:{course_ID: course_id,name: project.name}}" target="_blank">去完成</router-link>
-          </el-button>
+          <router-link :to="{path:`/stuProjectInfo`,query:{course_ID: course_id,name: project.name}}" target="_blank">
+            <el-button type="primary" icon="el-icon-edit" plain id="checkButton" size="medium">去完成</el-button>
+          </router-link>
         </template>
         <el-descriptions-item label="开始时间">{{project.start_time}}</el-descriptions-item>
         <el-descriptions-item label="截止时间" id="redEndTime">{{project.end_time}}</el-descriptions-item>

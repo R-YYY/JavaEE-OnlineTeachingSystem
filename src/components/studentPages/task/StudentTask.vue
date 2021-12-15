@@ -27,7 +27,6 @@ export default {
   },
   data(){
     return{
-      // course_ID: this.$route.query.course_id,
       course_ID: this.$route.params.course_id,
       activeName: 'project',
     }

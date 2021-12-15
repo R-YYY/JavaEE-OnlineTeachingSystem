@@ -1,0 +1,137 @@
+<template>
+  <div>
+    <div class="headStu">
+      <div
+        class="headDiv"
+        style="color: white; font-size: 30px; font-family: 宋体"
+      >
+        <div class="headLeft">
+          <!-- 头像部分 -->
+          <div>
+            <el-menu
+              :default-active="activeIndex"
+              class="port_box"
+              mode="horizontal"
+              @select="handleSelect"
+            >
+              <el-submenu class="sub">
+                <template slot="title" class="subtitle">
+                  <img src="@/assets/port.png" />
+                </template>
+                <el-menu-item>
+                  <el-button
+                    type="text"
+                    @click="toset"
+                    icon="el-icon-s-tools"
+                  >
+                    账号设置
+                  </el-button>
+                </el-menu-item>
+                <el-menu-item>
+                  <el-button
+                    type="text"
+                    @click="logout"
+                    icon="el-icon-switch-button"
+                  >
+                    安全退出
+                  </el-button>
+                </el-menu-item>
+              </el-submenu>
+            </el-menu>
+          </div>
+          <!-- 信息 -->
+          <div>Hi!{{ name }}同学</div>
+        </div>
+        <div class="headRight">
+          <div class="box1">
+            <div style="font-size: 60px">
+              {{ count }}
+            </div>
+            <div style="font-size: 20px">实验课程/门</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mainStu">
+      <div class="leftBox">
+        <div class="ing"></div>
+        <div class="finish"></div>
+      </div>
+      <div class="mainRight"></div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      name: "刘某某",
+      count: "0",
+    };
+  },
+  methods: {
+    logout() {
+      this.$router.push("/login");
+    },
+    toset(){
+        this.$router.push('/stuinfoset');
+    },
+  },
+};
+</script>
+
+
+<style scoped>
+.headStu {
+  height: 260px;
+  background-color: #369575;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.headDiv {
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+}
+.headLeft {
+  display: flex;
+  align-items: center;
+}
+.port_box {
+  height: 100px;
+  width: 150px;
+  position: relative;
+  background-color: transparent;
+}
+.port_box.el-menu--horizontal.el-menu {
+  /* 去下划线 */
+  border-bottom: none;
+}
+
+.el-menu--horizontal > .el-submenu /deep/ .el-submenu__title {
+  /* 去子菜单颜色 */
+  height: 100px;
+  display: flex;
+  align-items: center;
+  background-color: transparent !important;
+}
+
+.port_box img {
+  height: 90px;
+  width: 90px;
+  border: 1px solid #eee;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #ddd;
+  position: relative;
+}
+.headRight {
+  display: flex;
+  align-items: center;
+}
+
+.box1 {
+  text-align: center;
+}
+</style>

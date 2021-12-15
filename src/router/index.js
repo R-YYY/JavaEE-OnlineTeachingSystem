@@ -68,6 +68,14 @@ const routes = [
     }]
   },
   {
+    path:'/teachempty',
+    component:()=>import('@/components/adminPages/teachEmpty.vue'),
+  },
+  {
+    path:'/stuempty',
+    component:()=>import('@/components/adminPages/stuEmpty.vue'),
+  },
+  {
     path:'/studenthome',
     name:'StudentHome',
     component:StudentHome
@@ -81,6 +89,16 @@ const routes = [
     path:'/register',
     name:'Register',
     component:Register
+  },
+  {
+    path:'/stuinfoset',
+    name:'StudentInfoSet',
+    component:()=>import('@/components/studentPages/StudentInfoSet.vue'),
+  },
+  {
+    path:'/teainfoset',
+    name:'TeacherInfoSet',
+    component:()=>import('@/components/teacherPages/TeacherInfoSet.vue'),
   },
   {
     path: '/courses/:course_id',

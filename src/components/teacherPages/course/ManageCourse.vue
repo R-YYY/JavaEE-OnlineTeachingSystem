@@ -91,6 +91,9 @@ export default {
       method: "get",
       params: {
         course_ID: this.$route.params.course_id,
+      },
+      headers:{
+        token:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxOTUzMjgyIn0.2ID-BOcPkt-edZ33NDxcwlIdKdW5GLvqtFL0HomQ03g"
       }
     })
       .then(function (response) {

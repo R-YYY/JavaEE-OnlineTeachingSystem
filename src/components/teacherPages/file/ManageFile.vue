@@ -10,7 +10,7 @@
         </el-input>
         <el-button>搜索</el-button>
         <el-tooltip
-          class="item"`
+          class="item"
           effect="dark"
           content="仅可在二级目录内上传文件"
           placement="right"
@@ -175,6 +175,10 @@ export default {
     },
 
     handleUpload(file) {
+      this.$message({
+        type: "danger",
+        message: file.file.name + " 上传？",
+      });
       let data = new FormData();
       data.append("course_ID", this.$route.params.course_id);
       data.append("path", this.filePath);
@@ -185,6 +189,7 @@ export default {
         data: data,
       })
         .then((response) => {
+          console.log(response.data);
           if (response.data === 1) {
             this.$message({
               type: "success",
