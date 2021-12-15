@@ -9,7 +9,7 @@
         <img src="../assets/logo.png" alt="avatar" />
       </div> -->
       <div class="Title">
-        <h3>实验教学管理系统</h3>
+        <h3>Online Teaching System</h3>
       </div>
       <!-- 登录表单 -->
       <div>
@@ -17,21 +17,21 @@
           ref="loginFormRef"
           :model="loginForm"
           :rules="loginFormRules"
-          label-width="60px"
+          label-width="75px"
           class="login_form"
         >
-          <el-form-item label="账号" prop="id" class="white_Item">
+          <el-form-item label="Account" prop="id" class="white_Item">
             <el-input
               v-model="loginForm.id"
-              placeholder="请输入学号/工号"
+              placeholder="Please enter your account"
               prefix-icon="iconfont icon-user"
             >
             </el-input>
           </el-form-item>
-          <el-form-item label="密码" prop="password" class="white_Item">
+          <el-form-item label="Password" prop="password" class="white_Item">
             <el-input
               v-model="loginForm.password"
-              placeholder="请输入密码"
+              placeholder="Please enter your password"
               type="password"
               prefix-icon="iconfont icon-3702mima"
             >
@@ -39,10 +39,10 @@
           </el-form-item>
           <el-form-item class="buttons">
             <el-button type="primary" @click="login" class="button1"
-              >登录</el-button
+              >Login</el-button
             >
-            <el-button type="info" @click="resetLoginForm">重置</el-button>
-            <el-button type="register" @click="register">注册</el-button>
+            <el-button type="info" @click="resetLoginForm">Reset</el-button>
+            <el-button type="register" @click="register">Register</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -82,20 +82,20 @@ export default {
       // 表单验证
       loginFormRules: {
         id: [
-          { required: true, message: "请输入学号/工号", trigger: "blur" },
+          { required: true, message: "Please enter your account", trigger: "blur" },
           {
             min: 2,
             max: 10,
-            message: "长度在 2 到 10 个字符",
+            message: "Length requirement: 2~10 digits",
             trigger: "blur",
           },
         ],
         password: [
-          { required: true, message: "请输入密码", trigger: "blur" },
+          { required: true, message: "Please enter your password", trigger: "blur" },
           {
             min: 6,
             max: 18,
-            message: "长度在 6 到 18 个字符",
+            message: "Length requirement: 6~18 digits",
             trigger: "blur",
           },
         ],
@@ -136,12 +136,12 @@ export default {
           if (response.data === "1")
             this.$message({
               type: "error",
-              message: "登录失败",
+              message: "Fail to login!",
             });
           else
             this.$message({
               type: "success",
-              message: "登录成功",
+              message: "Successful!",
             });
           window.sessionStorage.setItem("id", response.data.account_ID);
           if (window.sessionStorage.getItem("id").length == 5)

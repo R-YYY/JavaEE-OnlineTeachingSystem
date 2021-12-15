@@ -19,38 +19,38 @@
           class="register_form"
         >
           <!-- 账号 -->
-          <el-form-item prop="userid" label="账号">
+          <el-form-item prop="userid" label="Account">
             <el-input
               v-model="registerForm.userid"
               prefix-icon="el-icon-user"
-              placeholder="请输入工号/学号"
+              placeholder="Please enter your account"
             ></el-input>
           </el-form-item>
           <!-- 密码 -->
-          <el-form-item prop="password" label="密码">
+          <el-form-item prop="password" label="Password">
             <el-input
               v-model="registerForm.password"
               prefix-icon="el-icon-lock"
               type="password"
               show-password
-              placeholder="请输入6-15位包含字母和数字的密码"
+              placeholder="Please enter a password with 6~15 digits, including numbers and characters"
             ></el-input>
           </el-form-item>
           <!-- 确认密码 -->
-          <el-form-item prop="rePassword" label="确认密码">
+          <el-form-item prop="rePassword" label="Confirm password">
             <el-input
               v-model="registerForm.rePassword"
               prefix-icon="el-icon-lock"
               type="password"
               class="length"
               show-password
-              placeholder="请再次输入密码"
+              placeholder="Please enter your password again"
             ></el-input>
           </el-form-item>
           <!-- 邮箱 -->
           <el-form-item
             prop="email"
-            label="邮箱"
+            label="E-mail"
             style="width: 100%; white-space: nowrap"
             :inline="false"
           >
@@ -58,7 +58,7 @@
               v-model="registerForm.email"
               prefix-icon="el-icon-message"
               style="width: 55%"
-              placeholder="请输入邮箱"
+              placeholder="Please enter your e-mail"
             ></el-input>
             <!-- 发送验证码 -->
             <el-button
@@ -70,7 +70,7 @@
                   :disabled="!show"
                   style="width: 40%; float: right"
                 > -->
-              <span>发送邮箱验证码</span>
+              <span>send code</span>
               <!-- <span v-show="show">发送邮箱验证码</span> -->
               <!-- <span v-show="!show" class="count"
                     >{{ count }} s后可点击重发</span
@@ -78,23 +78,23 @@
             </el-button>
           </el-form-item>
           <!-- 校验验证码 -->
-          <el-form-item prop="code" label="验证码">
+          <el-form-item prop="code" label="Verification Code">
             <el-input
               v-model="registerForm.code"
               prefix-icon="el-icon-chat-round"
-              placeholder="请输入验证码"
+              placeholder="Please enter the verification code"
             ></el-input>
           </el-form-item>
           <!-- 按钮区域 -->
-          <el-form-item style="margin-right=0;width:100%" align="right">
+          <el-form-item style="margin-right:0;width:100%" align="right">
             <!-- class="btns" -->
             <el-button type="text" @click="toregister"
-              >已有账号，去登录</el-button
+              >Already have an account? Go logging in!</el-button
             >
             <el-button type="primary" @click="register('registerForm')"
-              >注册</el-button
+              >Register</el-button
             >
-            <el-button type="info" @click="resetregisterForm">重置</el-button>
+            <el-button type="info" @click="resetregisterForm">Reset</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -110,7 +110,7 @@ export default {
     //在data里面定义两个校验器,检验两次密码是否一致
     var validatePass = (rule, value, callback) => {
       if (value !== this.registerForm.password) {
-        callback(new Error("两次输入密码不一致!"));
+        callback(new Error("The two passwords do not match!"));
       } else {
         callback();
       }
@@ -129,17 +129,17 @@ export default {
       registerFormRules: {
         //验证账号是否合法
         userid: [
-          { required: true, message: "请输入账号", trigger: "blur" },
+          { required: true, message: "Please enter the account", trigger: "blur" },
           {
             min: 5,
             max: 7,
-            message: "长度在 5 到 7 个字符",
+            message: "Length requirement: 5~7 digits",
             trigger: "blur",
           },
           {
             validator: function (rule, value, callback) {
               if (/(^\d{5,7}$)/.test(value) == false) {
-                callback(new Error("请输入正确的账号"));
+                callback(new Error("Please enter a correct account"));
               } else {
                 //校验通过
                 callback();
@@ -149,14 +149,14 @@ export default {
           },
         ],
         //验证验证码是否合法
-        code: [{ required: true, message: "请输入验证码", trigger: "blur" }],
+        code: [{ required: true, message: "Please enter the verification code", trigger: "blur" }],
         //验证邮箱是否合法
         email: [
-          { required: true, message: "请输入邮箱", trigger: "blur" },
+          { required: true, message: "Please enter the e-mail", trigger: "blur" },
           {
             min: 1,
             max: 25,
-            message: "长度在 1 到 25 个字符",
+            message: "Length requirement: 1~25 digits",
             trigger: "blur",
           },
           {
@@ -167,7 +167,7 @@ export default {
                   value
                 ) == false
               ) {
-                callback(new Error("请输入正确的邮箱"));
+                callback(new Error("Please enter a correct e-mail"));
               } else {
                 //校验通过
                 callback();
@@ -178,11 +178,11 @@ export default {
         ],
         //验证密码是否合法
         password: [
-          { required: true, message: "请输入登录密码", trigger: "blur" },
+          { required: true, message: "Please enter the password", trigger: "blur" },
           {
             min: 6,
             max: 15,
-            message: "长度在 6 到 15 个字符",
+            message: "Length requirement: 6~15 digits",
             trigger: "blur",
           },
           {
@@ -193,7 +193,7 @@ export default {
                 false
               ) {
                 callback(
-                  new Error("请输入包含字母和数字的组合，不能使用特殊字符")
+                  new Error("Please enter a correct password according to the rule")
                 );
               } else {
                 //校验通过
@@ -205,11 +205,11 @@ export default {
         ],
         //确认密码是否正确
         rePassword: [
-          { required: true, message: "请再次确认密码", trigger: "blur" },
+          { required: true, message: "Confirm the password", trigger: "blur" },
           {
             min: 6,
             max: 15,
-            message: "长度在 6 到 15 个字符",
+            message: "Length requirement: 6~15 digits",
             trigger: "blur",
           },
           { validator: validatePass, trigger: "blur" },
@@ -235,7 +235,7 @@ export default {
       // console.log("eess6@163.com");
       this.$refs[registerForm].validateField("email", (email_check) => {
         if (email_check) return;
-        console.log("邮箱验证通过");
+        console.log("Verified sucessfully");
         let data = new FormData();
         data.append("account_ID", this.registerForm.userid);
         data.append("email", this.registerForm.email);
@@ -249,29 +249,29 @@ export default {
             if (response.data === 1) {
               this.$message({
                 type: "success",
-                message: "发送成功！",
+                message: "Send successfully！",
               });
             } else if (response.data === -1) {
               this.$message({
                 type: "error",
-                message: "学号或工号已注册！请重试",
+                message: "Already registered! Please try again!",
               });
             } else if (response.data === -2) {
               this.$message({
                 type: "error",
-                message: "学号或工号不存在！请重试",
+                message: "Account does not exist! Please try again!",
               });
             } else {
               this.$message({
                 type: "error",
-                message: "发送失败！请重试",
+                message: "Fail to send! Please try again!",
               });
             }
           })
           .catch(() => {
             this.$message({
               type: "error",
-              message: "发送失败！请重试",
+              message: "Fail to send! Please try again!",
             });
           });
       });
@@ -310,20 +310,20 @@ export default {
               if (response.data === 1) {
                 this.$message({
                   type: "success",
-                  message: "注册成功！",
+                  message: "Registered successfully！",
                 });
                 this.$router.push("/");
               } else {
                 this.$message({
                   type: "error",
-                  message: "填写信息错误！请重试",
+                  message: "Wrong information! Please try again!",
                 });
               }
             })
             .catch(() => {
               this.$message({
                 type: "error",
-                message: "注册失败！请重试",
+                message: "Fail to register! Please try again!",
               });
             });
         } else {

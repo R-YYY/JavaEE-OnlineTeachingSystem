@@ -3,14 +3,14 @@
     <el-header>
       <!-- 头部 -->
       <div>
-        <span>实验教学系统后台管理</span>
+        <span>OTS Back-office Management</span>
       </div>
-      <el-button type="primary" @click="logout">退出</el-button>
+      <el-button type="primary" @click="logout">Logout</el-button>
     </el-header>
     <!-- 主体部分 -->
     <el-container>
       <!-- 侧边栏 -->
-      <el-aside :width="isCollapse ? '64px' : '200px'">
+      <el-aside :width="isCollapse ? '64px' : '220px'">
         <div class="toggle-button" @click="togleCollapse">
           <span style="text-align: center; display: block">||||</span>
         </div>
@@ -27,16 +27,16 @@
             <!-- 一级菜单模板 -->
             <template slot="title">
               <i class="el-icon-s-custom"></i>
-              <span>用户管理</span>
+              <span>USER MANAGEMENT</span>
             </template>
             <el-menu-item-group>
               <el-menu-item index="/teacherlist">
                 <i class="el-icon-chat-dot-square"></i>
-                <span slot="title">教师列表</span>
+                <span slot="title">Teacher List</span>
               </el-menu-item>
               <el-menu-item index="/stulist">
                 <i class="el-icon-chat-dot-square"></i>
-                <span slot="title">学生列表</span>
+                <span slot="title">Student List</span>
               </el-menu-item>
             </el-menu-item-group>
           </el-submenu>

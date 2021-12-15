@@ -16,19 +16,19 @@
         <!-- 账户id -->
         <el-table-column
           prop="account_ID"
-          label="账号id"
+          label="Account ID"
           sortable
           width="150"
           column-key="id"
         >
         </el-table-column>
         <!-- 姓名 -->
-        <el-table-column prop="name" label="姓名" width="150" column-key="name">
+        <el-table-column prop="name" label="Name" width="150" column-key="name">
         </el-table-column>
         <!-- 邮箱 -->
         <el-table-column
           prop="email"
-          label="邮箱"
+          label="E-mail"
           width="200"
           column-key="email"
         >
@@ -36,11 +36,11 @@
         <!-- 账户状态 -->
         <el-table-column
           prop="is_active"
-          label="账户状态"
-          width="100"
+          label="Status"
+          width="200"
           :filters="[
-            { text: '未激活', value: '0' },
-            { text: '已激活', value: '1' },
+            { text: 'Activated', value: '0' },
+            { text: 'Inactivated', value: '1' },
           ]"
           :filter-method="filterStatus"
           filter-placement="bottom-end"
@@ -50,32 +50,32 @@
               :type="scope.row.is_active === '0' ? 'primary' : 'success'"
               disable-transitions
             >
-              <div v-if="scope.row.is_active != '0'">已激活</div>
-              <div v-else>未激活</div>
+              <div v-if="scope.row.is_active != '0'">Activated</div>
+              <div v-else>Inactivated</div>
             </el-tag>
           </template>
         </el-table-column>
         <!-- 封禁or激活 -->
-        <el-table-column label="操作" width="150">
+        <el-table-column label="Operation" width="150">
           <div slot-scope="scope" v-if="scope.row.is_active != '0'">
             <el-button size="mini" type="danger" @click="ban(scope.row)"
-              >封禁</el-button
+              >Block</el-button
             >
           </div>
           <div v-else>
             <el-button size="mini" type="success" @click="activation(scope.row)"
-              >激活</el-button
+              >Activate</el-button
             >
           </div>
         </el-table-column>
         <!-- 重置密码 -->
-        <el-table-column label="重置">
+        <el-table-column label="Reset">
           <el-button
             size="mini"
             type="danger"
             @click="startreset(scope.row)"
             slot-scope="scope"
-            >重置密码</el-button
+            >Reset Password</el-button
           >
         </el-table-column>
         <!-- 删除账户 -->
@@ -94,7 +94,7 @@
               @click="handleSerach(scope.$index, scope.row)"
               v-model="search"
               size="mini"
-              placeholder="输入账号ID搜索"
+              placeholder="Enter account ID to search"
             />
           </template>
         </el-table-column>
@@ -155,12 +155,12 @@ export default {
           if (res.data !== 1)
             this.$message({
               type: "error",
-              message: "封禁失败!请重试！",
+              message: "Fail to block! Please try again!",
             });
           else {
             this.$message({
               type: "success",
-              message: "封禁成功!",
+              message: "Blocked successfully!",
             });
           }
         })
@@ -194,12 +194,12 @@ export default {
           if (res.data !== 1)
             this.$message({
               type: "error",
-              message: "激活失败!请重试！",
+              message: "Fail to activate! Please try again!",
             });
           else
             this.$message({
               type: "success",
-              message: "激活成功!",
+              message: "Activated successfully!",
             });
         })
         .catch(() => {
@@ -215,9 +215,9 @@ export default {
     },
     //重置密码确认
     startreset(row) {
-      this.$confirm("此操作将为该账户重置密码为111111，是否继续？", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
+     this.$confirm("You are going to reset the password of this account as 111111. Sure to continue?", "Tip", {
+        confirmButtonText: "Confirm",
+        cancelButtonText: "Cancel",
         type: "warning",
       })
         .then(() => {
@@ -226,7 +226,7 @@ export default {
         .catch(() => {
           this.$message({
             type: "info",
-            message: "已取消",
+            message: "Cancelled",
           });
         });
     },
@@ -249,12 +249,12 @@ export default {
           if (res.data !== 1)
             this.$message({
               type: "error",
-              message: "重置失败!请重试！",
+              message: "Fail to reset! Please try again!",
             });
           else
             this.$message({
               type: "success",
-              message: "重置成功!",
+              message: "Resetted successfully!",
             });
         })
         .catch(() => {
@@ -270,9 +270,9 @@ export default {
     },
     //删除账户确认
     startdeleteu(row) {
-      this.$confirm("此操作将删除该账户，是否继续？", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
+      this.$confirm("You are going to delete this account. Sure to continue?", "Tip", {
+        confirmButtonText: "Confirm",
+        cancelButtonText: "Cancel",
         type: "warning",
       })
         .then(() => {
@@ -281,7 +281,7 @@ export default {
         .catch(() => {
           this.$message({
             type: "info",
-            message: "已取消",
+            message: "Cancelled",
           });
         });
     },
@@ -304,12 +304,12 @@ export default {
           if (res.data !== 1)
             this.$message({
               type: "error",
-              message: "删除失败!请重试！",
+              message: "Fail to delete! Please try again!",
             });
           else
             this.$message({
               type: "success",
-              message: "删除成功!",
+              message: "Deleted successfully!",
             });
         })
         .catch(() => {
@@ -333,13 +333,13 @@ export default {
     },
     //每页条数改变时触发 选择一页显示多少行
     handleSizeChange(val) {
-      console.log(`每页 ${val} 条`);
+      console.log(`${val} per page`);
       this.currentPage = 1;
       this.pageSize = val;
     },
     //当前页改变时触发 跳转其他页
     handleCurrentChange(val) {
-      console.log(`当前页: ${val}`);
+      console.log(`Current page: ${val}`);
       this.currentPage = val;
     },
     handleSerach(row) {
