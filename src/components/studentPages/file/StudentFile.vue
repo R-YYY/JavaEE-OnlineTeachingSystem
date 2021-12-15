@@ -1,15 +1,15 @@
 <template>
   <div id="File">
-    <el-tabs class="stuFileTab" v-model="activeName" @tab-click="handleClick">
+    <el-tabs class="stuFileTab" v-model="activeName">
 
       <el-tab-pane name="courseFile">
         <span slot="label" class="paneName"><i class="el-icon-document"></i> 课程参考资料</span>
-        <CourseFile v-bind:course_id="course_ID"></CourseFile>
+        <CourseFile></CourseFile>
       </el-tab-pane>
 
       <el-tab-pane name="projectFile">
         <span slot="label" class="paneName"><i class="el-icon-notebook-2"></i> 项目参考资料</span>
-        <ProjectFile v-bind:course_id="course_ID"></ProjectFile>
+        <ProjectFile></ProjectFile>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -24,14 +24,8 @@ export default {
   data(){
     return{
       activeName:'courseFile',
-      course_ID: this.$route.params.course_id,
     }
   },
-  methods:{
-    handleClick(tab, event){
-      console.log(tab, event);
-    },
-  }
 }
 </script>
 

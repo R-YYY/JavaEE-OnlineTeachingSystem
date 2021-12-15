@@ -21,12 +21,6 @@
 import router from "@/router";
 
 export default {
-  // props:{
-  //   course_id:{
-  //     type: String,
-  //     default: '',
-  //   },
-  // },
   data(){
     return{
       project_list:[],
@@ -34,30 +28,6 @@ export default {
     }
   },
   methods:{
-    // btnClick(start_time, name){
-    //   var moment=require('moment');
-    //   // 格式化
-    //   if(start_time > moment(new Date()).format('YYYY-MM-DD HH:mm:ss')){
-    //     this.$message({
-    //       message: '项目还未发布，暂时无法查看',
-    //       type: 'warning'
-    //     });
-    //   }
-    //   else{
-    //     console.log(this.course_id);
-    //     console.log(name);
-    //     this.$router.push(
-    //         {
-    //           path:`/stuProjectInfo`,
-    //           // name: 'stuProjectInfo',
-    //           query: {
-    //             course_ID: this.course_id,
-    //             name: name,
-    //           }
-    //         }
-    //     );
-    //   }
-    // },
   },
   mounted() {
     let id = this.course_id
@@ -67,6 +37,9 @@ export default {
           params: {
             course_ID: id,
           },
+          headers:{
+            token:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+          }
         })
         .then((response)=>{
           this.project_list=response.data

@@ -64,7 +64,7 @@ export default {
     studentCourseHome(){
       this.isShow='none'
       this.$router.push({
-        name:'stuTasks',
+        name:'StudentCourseHome',
         params:{
           course_id:'42024401'
         }

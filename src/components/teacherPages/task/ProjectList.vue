@@ -242,11 +242,11 @@ export default {
       row.is_correct=false
       let data = new FormData()
       data.append("course_ID",this.$route.params.course_id)
-      data.append("project_name",this.$route.params)
+      // data.append("project_name",)
       this.$axios({
         url:"/report/correct",
         method:"post",
-        data:
+        data:data
       })
     }
   },

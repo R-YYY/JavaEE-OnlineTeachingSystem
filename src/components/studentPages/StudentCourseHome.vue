@@ -67,11 +67,10 @@
             <span style="font-size: 20px">课程信息</span>
           </div>
           <div>
-            <p>{{course.course_ID}}</p>
-            <p>{{course.name}}</p>
+<!--            <p>{{course.course_ID}}</p>-->
+<!--            <P>{{courseID}}</P>-->
+<!--            <p>{{course.name}}</p>-->
             <p>{{course.description}}</p>
-            <p>{{course.attend_percentage}}</p>
-            <p>{{course.project_percentage}}</p>
           </div>
         </el-card>
       </div>
@@ -90,7 +89,9 @@ export default {
       student_ID:'1951014',
       activeIndex: '',
       teacher_list:[],
-      course : null,
+      course : {
+        description:'',
+      },
     }
   },
   methods:{
@@ -151,6 +152,9 @@ export default {
         '/teach/getTeacherInfoList',{
           params:{
             course_ID:id,
+          },
+          headers:{
+            token:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
           }
         }
     ).then(
@@ -162,6 +166,9 @@ export default {
         '/course/get',{
           params:{
             course_ID:id,
+          },
+          headers:{
+            token:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
           }
         }
     ).then((response)=>{

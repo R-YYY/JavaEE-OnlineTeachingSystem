@@ -29,12 +29,6 @@
 <script>
 export default {
   name: "StudentAttendance",
-  props:{
-    course_id:{
-      type: String,
-      default: '',
-    },
-  },
   inject: ['reload'],     //注入依赖
   data(){
     return {
@@ -43,17 +37,21 @@ export default {
   },
   mounted(){
     let that=this;
-    let id=that.course_id;
+    let id=this.$route.params.course_id;
     let student_id='1951014';
     this.$axios.get('/attend/getAttendInfoList',
         {
           params:{
             course_ID:id,
             student_ID:student_id,
+          },
+          headers:{
+            token:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
           }
         }
     ).then(
         (response)=>{
+          console.log(response.data);
           that.attendance_list=response.data;
         }
     )

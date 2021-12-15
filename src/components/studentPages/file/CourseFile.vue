@@ -14,23 +14,20 @@
 
 export default {
   name: "CourseFile",
-  props:{
-    course_id:{
-      type: String,
-      default: '',
-    },
-  },
   data(){
     return{
       course_files: [],
     }
   },
     mounted() {
-    var id=this.course_id;
+    var id=this.$route.params.course_id;
     this.$axios.get('/file/getDirectoryFiles',{
       params:{
         course_ID:id,
         isProject:0,
+      },
+      headers:{
+        token:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
       }
     }).then((response)=>{
       this.course_files=response.data;
@@ -62,17 +59,23 @@ export default {
         url: "/file/downloadFile",
         method: "post",
         data: data,
+        headers:{
+          token:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+        },
         responseType: "blob",
       }).then((response) => {
         console.log(response);
         let blob = new Blob([response.data]);
         console.log(blob);
-        const disposition = response.headers["content-disposition"];
+        var disposition = response.headers["content-disposition"];
         //获得文件名
+        // let fileName='';
+        // fileName=fileName+
         let fileName = disposition.substring(
             disposition.indexOf("filename=") + 9,
             disposition.length
         );
+        console.log(fileName)
         //解码
         fileName = decodeURI(fileName);
         if (window.navigator.msSaveOrOpenBlob) {

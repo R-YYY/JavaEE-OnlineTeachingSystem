@@ -13,23 +13,20 @@
 <script>
 export default {
   name: "ProjectFile",
-  props:{
-    course_id:{
-      type: String,
-      default: '',
-    },
-  },
   data(){
     return{
       project_files: [],
     }
   },
   mounted() {
-    var id=this.course_id;
+    var id=this.$route.params.course_id;
     this.$axios.get('/file/getDirectoryFiles',{
       params:{
         course_ID:id,
         isProject:1,
+      },
+      headers:{
+        token:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
       }
     }).then((response)=>{
       this.project_files=response.data;
@@ -61,6 +58,9 @@ export default {
         url: "/file/downloadFile",
         method: "post",
         data: data,
+        headers:{
+          token:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+        },
         responseType: "blob",
       }).then((response) => {
         console.log(response);
