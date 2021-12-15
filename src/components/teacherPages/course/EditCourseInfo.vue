@@ -108,7 +108,11 @@ export default {
       this.$axios({
         url: "/course/setInfo",
         method: "post",
-        data:data
+        data:data,
+        headers: {
+          token:
+              "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+        },
       })
         .then((response) => {
           console.log(response.data);
@@ -138,7 +142,11 @@ export default {
       this.$axios({
         url:"/file/uploadPhoto",
         method:"post",
-        data:data
+        data:data,
+        headers: {
+          token:
+              "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+        },
       }).then((response)=>{
         if(response.data === 1){
           this.$message({

@@ -61,7 +61,10 @@
               placeholder="请输入邮箱"
             ></el-input>
             <!-- 发送验证码 -->
-            <el-button @click="getCode('registerForm')" style="width: 40%; float: right">
+            <el-button
+              @click="getCode('registerForm')"
+              style="width: 40%; float: right"
+            >
               <!-- <el-button
                   @click="getCode()"
                   :disabled="!show"
@@ -230,58 +233,48 @@ export default {
     //向邮箱发送验证码
     getCode(registerForm) {
       // console.log("eess6@163.com");
-      this.$refs[registerForm].validateField('email',(email_check)=>{
-        if(email_check) return
-        console.log('邮箱验证通过');
-        let regemail = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
-        if (!regemail.test(this.registerForm.email)) {
-          this.$message({
-            showClose: true,
-            message: "请输入格式正确有效的邮箱号!",
-            type: "error",
-          });
-        } else {
-          console.log("经过检验格式正确"); //已执行
-          let data = new FormData();
-          data.append("account_ID", this.registerForm.userid);
-          data.append("email", this.registerForm.email);
-          this.$axios({
-            url: "/account/sendEmail",
-            method: "post",
-            data: data,
-          })
-            .then((response) => {
-              console.log(response.data);
-              if (response.data === 1) {
-                this.$message({
-                  type: "success",
-                  message: "发送成功！",
-                });
-              } else if (response.data === -1) {
-                this.$message({
-                  type: "error",
-                  message: "学号或工号已注册！请重试",
-                });
-              } else if (response.data === -2) {
-                this.$message({
-                  type: "error",
-                  message: "学号或工号不存在！请重试",
-                });
-              } else {
-                this.$message({
-                  type: "error",
-                  message: "发送失败！请重试",
-                });
-              }
-            })
-            .catch(() => {
+      this.$refs[registerForm].validateField("email", (email_check) => {
+        if (email_check) return;
+        console.log("邮箱验证通过");
+        let data = new FormData();
+        data.append("account_ID", this.registerForm.userid);
+        data.append("email", this.registerForm.email);
+        this.$axios({
+          url: "/account/sendEmail",
+          method: "post",
+          data: data,
+        })
+          .then((response) => {
+            console.log(response.data);
+            if (response.data === 1) {
+              this.$message({
+                type: "success",
+                message: "发送成功！",
+              });
+            } else if (response.data === -1) {
+              this.$message({
+                type: "error",
+                message: "学号或工号已注册！请重试",
+              });
+            } else if (response.data === -2) {
+              this.$message({
+                type: "error",
+                message: "学号或工号不存在！请重试",
+              });
+            } else {
               this.$message({
                 type: "error",
                 message: "发送失败！请重试",
               });
+            }
+          })
+          .catch(() => {
+            this.$message({
+              type: "error",
+              message: "发送失败！请重试",
             });
-        }
-      })
+          });
+      });
       console.log("55555"); //执行
       // 验证码倒计时
       if (!this.timer) {

@@ -104,7 +104,11 @@ export default {
       this.$axios({
         url:"/teach/deleteTeachCourse",
         method:"post",
-        data:teacherInfo
+        data:teacherInfo,
+        headers: {
+          token:
+              "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+        },
       })
         .then(() => {
           this.teacherList.splice(data, 1);
@@ -148,7 +152,11 @@ export default {
       this.$axios({
         url:"/teach/addTeachCourse",
         method:"post",
-        data:teacherInfo
+        data:teacherInfo,
+        headers: {
+          token:
+              "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+        },
       })
         .then((response) => {
           if (response.data === 1) {
@@ -184,7 +192,11 @@ export default {
         method:"get",
         params:{
           course_ID: this.$route.params.course_id,
-        }
+        },
+        headers: {
+          token:
+              "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+        },
       })
         .then((response) => {
           this.teacherList = response.data;

@@ -81,6 +81,10 @@ export default {
         url: "take/deleteTakeCourse",
         method: "post",
         data: studentInfo,
+        headers: {
+          token:
+              "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+        },
       })
         .then(() => {
           this.studentList.splice(data, 1);
@@ -126,6 +130,10 @@ export default {
         url: "/take/addTakeCourse",
         method: "post",
         data: studentInfo,
+        headers: {
+          token:
+              "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+        },
       })
         .then((response) => {
           if (response.data === 1) {
@@ -163,6 +171,10 @@ export default {
         params: {
           course_ID: this.$route.params.course_id,
           is_student: 1,
+        },
+        headers: {
+          token:
+              "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
         },
       })
         .then((response) => {

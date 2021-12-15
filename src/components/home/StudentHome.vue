@@ -19,11 +19,7 @@
                   <img src="@/assets/port.png" />
                 </template>
                 <el-menu-item>
-                  <el-button
-                    type="text"
-                    @click="toset"
-                    icon="el-icon-s-tools"
-                  >
+                  <el-button type="text" @click="toset" icon="el-icon-s-tools">
                     账号设置
                   </el-button>
                 </el-menu-item>
@@ -43,7 +39,7 @@
           <div>Hi!{{ name }}同学</div>
         </div>
         <div class="headRight">
-          <div class="box1">
+          <div class="headbox1">
             <div style="font-size: 60px">
               {{ count }}
             </div>
@@ -53,11 +49,23 @@
       </div>
     </div>
     <div class="mainStu">
-      <div class="leftBox">
-        <div class="ing"></div>
-        <div class="finish"></div>
+      <div class="mainDiv">
+        <el-card class="mainLeft">
+          <div class="ing">
+            <div class="title">
+              <h2>进行中的课程</h2>
+            </div>
+            <div class="content">
+              <div class="course1">课程1</div>
+              <div class="course2">课程2</div>
+              <div class="course3">课程3</div>
+              <div class="course4">课程4</div>
+            </div>
+          </div>
+          <div class="finish"></div>
+        </el-card>
+        <el-card class="mainRight">????</el-card>
       </div>
-      <div class="mainRight"></div>
     </div>
   </div>
 </template>
@@ -74,8 +82,8 @@ export default {
     logout() {
       this.$router.push("/login");
     },
-    toset(){
-        this.$router.push('/stuinfoset');
+    toset() {
+      this.$router.push("/stuinfoset");
     },
   },
 };
@@ -109,7 +117,6 @@ export default {
   /* 去下划线 */
   border-bottom: none;
 }
-
 .el-menu--horizontal > .el-submenu /deep/ .el-submenu__title {
   /* 去子菜单颜色 */
   height: 100px;
@@ -117,7 +124,6 @@ export default {
   align-items: center;
   background-color: transparent !important;
 }
-
 .port_box img {
   height: 90px;
   width: 90px;
@@ -130,8 +136,22 @@ export default {
   display: flex;
   align-items: center;
 }
-
-.box1 {
+.headbox1 {
   text-align: center;
+}
+
+.mainStu {
+  display: flex;
+  justify-content: center;
+  top:220px;
+  z-index: 2;
+}
+.mainDiv{
+  width: 70%;
+  display: flex;
+  justify-content: space-between;
+}
+.mainleft {
+  width: 50%;
 }
 </style>

@@ -145,6 +145,10 @@ export default {
         url: "/account/ban",
         method: "post",
         data: taInfo,
+        headers: {
+          token:
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+        },
       })
         .then((res) => {
           console.log(res.data);
@@ -180,6 +184,10 @@ export default {
         url: "/account/active",
         method: "post",
         data: taInfo1,
+        headers: {
+          token:
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+        },
       })
         .then((res) => {
           console.log("传出的" + res.data);
@@ -231,6 +239,10 @@ export default {
         url: "/account/resetPassword",
         method: "post",
         data: taInfo,
+        headers: {
+          token:
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+        },
       })
         .then((res) => {
           console.log("传出的" + res.data);
@@ -282,6 +294,10 @@ export default {
         url: "/account/delete",
         method: "post",
         data: taInfo,
+        headers: {
+          token:
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+        },        
       })
         .then((res) => {
           console.log("传出的" + res.data);
@@ -335,6 +351,10 @@ export default {
     this.$axios({
       url: "/account/getAllTeacherAccount",
       method: "get",
+      headers: {
+        token:
+          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+      },
     })
       .then(function (response) {
         _this.tableData = response.data;

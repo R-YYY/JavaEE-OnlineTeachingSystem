@@ -87,7 +87,11 @@ export default {
       this.$axios({
         url:"/take/deleteTakeCourse",
         method:"post",
-        data:taInfo
+        data:taInfo,
+        headers: {
+          token:
+              "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+        },
       })
         .then(() => {
           this.taList.splice(data, 1);
@@ -132,7 +136,11 @@ export default {
       this.$axios({
         url:"/take/addTakeCourse",
         method:"post",
-        data:taInfo
+        data:taInfo,
+        headers: {
+          token:
+              "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+        },
       })
         .then((response) => {
           if (response.data === 1) {
@@ -169,7 +177,11 @@ export default {
         params:{
           course_ID: this.$route.params.course_id,
           is_student: 0,
-        }
+        },
+        headers: {
+          token:
+              "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+        },
       })
         .then((response) => {
           this.taList = response.data;

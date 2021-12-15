@@ -187,6 +187,10 @@ export default {
         url: "file/uploadFile",
         method: "post",
         data: data,
+        headers: {
+          token:
+              "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+        },
       })
         .then((response) => {
           console.log(response.data);
@@ -238,6 +242,10 @@ export default {
         url: "/file/deleteFile",
         method: "post",
         data: data,
+        headers: {
+          token:
+              "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+        },
       })
         .then((response) => {
           if (response.data === 1) {
@@ -274,6 +282,10 @@ export default {
         url: "/file/downloadFile",
         method: "post",
         data: data,
+        headers: {
+          token:
+              "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+        },
         responseType: "blob",
       }).then((response) => {
         console.log(response);
@@ -308,6 +320,10 @@ export default {
       params: {
         course_ID: this.$route.params.course_id,
       },
+      headers: {
+        token:
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+      },
     })
       .then((response) => {
         this.courseName = response.data.name;
@@ -321,6 +337,10 @@ export default {
       method: "get",
       params: {
         course_ID: this.$route.params.course_id,
+      },
+      headers: {
+        token:
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
       },
     })
       .then((response) => {
@@ -347,6 +367,10 @@ export default {
         course_ID: this.$route.params.course_id,
         path: this.filePath,
       },
+      headers: {
+        token:
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+      },
     }).then((response) => {
       this.fileList = response.data;
     });
@@ -360,6 +384,10 @@ export default {
         params: {
           course_ID: this.$route.params.course_id,
           path: newVal,
+        },
+        headers: {
+          token:
+              "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
         },
       })
         .then((response) => {

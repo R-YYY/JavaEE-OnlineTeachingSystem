@@ -5,10 +5,10 @@
         class="searchProject"
         v-model="input"
         placeholder="请输入项目名称"
-        @input="search"
+        @input="searchProject"
       >
       </el-input>
-      <el-button type="primary" @click="search">
+      <el-button type="primary" @click="searchProject">
         <span>搜索</span>
       </el-button>
     </div>
@@ -58,43 +58,98 @@
           <el-dialog :visible.sync="infoDialogVisible"> </el-dialog>
 
           <!--实验提交情况-->
-          <el-dialog :visible.sync="reportDialogVisible">
-            <el-table :data="reportList">
-              <el-table-column label="学号" prop="student_ID"></el-table-column>
-              <el-table-column label="姓名" prop="name"></el-table-column>
+          <el-drawer
+            :visible.sync="reportDialogVisible"
+            :direction="direction"
+            :with-header="false"
+            size="55%"
+          >
+            <div>
+              <el-input
+                class="searchReport"
+                v-model="input"
+                placeholder="请输入学生学号或姓名或报告名称"
+              >
+              </el-input>
+              <el-button type="primary">
+                <span>搜索</span>
+              </el-button>
+            </div>
+            <el-table
+                class="reportTable"
+                :data="reportList"
+                :row-style="{ height: '50px' }"
+                :cell-style="{ padding: '0' }">
+              <el-table-column
+                label="学号"
+                prop="student_ID"
+                width="80px"
+                sortable
+              ></el-table-column>
+              <el-table-column
+                label="姓名"
+                prop="name"
+                width="80px"
+                sortable
+              ></el-table-column>
               <el-table-column
                 label="提交时间"
                 prop="submit_time"
                 sortable
+                width="150px"
               ></el-table-column>
+              <el-table-column label="提交报告" sortable width="230px"
+                ><template slot-scope="scope">
+                <el-tooltip content="点击下载" placement="top">
+                  <a class="reportSrc">{{ scope.row.report_name }}</a>
+                </el-tooltip>
+                </template>
+              </el-table-column>
               <el-table-column
                 label="批改状态"
                 prop="correct_state"
                 align="center"
-                sortable
+                width="90px"
                 :filters="[
                   { text: '已批改', value: '已批改' },
                   { text: '未批改', value: '未批改' },
-                  ]"
-                :filter-method="filterState">
+                ]"
+                :filter-method="filterState"
+              >
                 <template slot-scope="scope">
                   <el-tag
-                    :type="scope.row.correct_state === '已批改'? 'success': 'danger'"
+                    :type="scope.row.correct_state === '已批改'? 'success':'danger'"
                     disable-transitions
                     >{{ scope.row.correct_state }}</el-tag>
                 </template>
               </el-table-column>
-              <el-table-column width="120px">
+              <el-table-column label="评分" width="85px" align="center" sortable>
+                <template slot-scope="scope">
+                  <span v-if="scope.row.is_correct===false">{{scope.row.score+" / 100"}}</span>
+                  <input v-model="inputScore" class="inputScore" v-if="scope.row.is_correct === true">
+                  </input>
+                </template>
+              </el-table-column>
+              <el-table-column label="操作" width="70px" align="right">
                 <template slot-scope="scope">
                   <el-button
+                      class="checkReport"
                       type="text"
-                      @click="open(scope.row)"
-                  >查看
+                      v-if="scope.row.is_correct===false"
+                      @click="scope.row.is_correct=true"
+                  >评分
+                  </el-button>
+                  <el-button
+                      class="checkReport"
+                      type="text"
+                      v-if="scope.row.is_correct===true"
+                      @click="correctReport(scope.row)"
+                  >确定
                   </el-button>
                 </template>
               </el-table-column>
             </el-table>
-          </el-dialog>
+          </el-drawer>
         </el-tab-pane>
         <el-tab-pane label="课程考勤" name="attendance"> </el-tab-pane>
       </el-tabs>
@@ -111,6 +166,8 @@ export default {
       projectList: [],
       tmpList: [],
       reportList: [],
+      direction: "ltr",
+      inputScore:"",
       reportDialogVisible: false,
       infoDialogVisible: false,
     };
@@ -123,7 +180,7 @@ export default {
     },
 
     //根据输入名称在卡片列表中搜索
-    search() {
+    searchProject() {
       if (this.input === "") this.tmpList = this.projectList;
       else {
         this.tmpList = [];
@@ -137,6 +194,7 @@ export default {
 
     //查看实验报告
     checkReport(data) {
+      this.reportList = [];
       this.$axios({
         url: "/report/getTotalReport",
         method: "get",
@@ -144,17 +202,23 @@ export default {
           course_ID: this.$route.params.course_id,
           project_name: data,
         },
+        headers: {
+          token:
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+        },
       })
         .then((response) => {
           console.log(response.data);
-          this.reportList = [];
           for (let i = 0; i < response.data.length; i++) {
             this.reportList.push({
               student_ID: response.data[i].student_ID,
               name: response.data[i].name,
               submit_time: response.data[i].submit_time,
+              report_name: response.data[i].report_name,
               correct_state:
                 response.data[i].correct_time === null ? "未批改" : "已批改",
+              score:response.data[i].score,
+              is_correct:false
             });
           }
           // this.reportList = response.data;
@@ -171,6 +235,20 @@ export default {
     filterState(value, row) {
       return row.correct_state === value;
     },
+
+    correctReport(row){
+      if(this.inputScore < 0 || this.inputScore > 100 || this.inputScore%1 !== 0)
+        return
+      row.is_correct=false
+      let data = new FormData()
+      data.append("course_ID",this.$route.params.course_id)
+      data.append("project_name",this.$route.params)
+      this.$axios({
+        url:"/report/correct",
+        method:"post",
+        data:
+      })
+    }
   },
 
   mounted() {
@@ -180,6 +258,10 @@ export default {
       method: "get",
       params: {
         course_ID: this.$route.params.course_id,
+      },
+      headers: {
+        token:
+          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
       },
     })
       .then((response) => {
@@ -235,5 +317,31 @@ export default {
 .projectName {
   margin-left: 30px;
   font-size: 18px;
+}
+
+.searchReport {
+  width: 300px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: 30px;
+}
+
+.reportTable {
+  margin-left: 20px;
+  width: 800px;
+}
+
+.reportSrc {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.checkReport{
+  margin-left: 20px;
+}
+
+.inputScore{
+  height:25px;
+  width: 60px
 }
 </style>
