@@ -184,6 +184,7 @@ const routes = [
         path: 'stuTasks',
         name: 'stuTasks',
         component: StudentTask,
+        // redirect:'/'
         children:[
           {
             path:'',

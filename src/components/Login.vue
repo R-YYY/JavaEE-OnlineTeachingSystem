@@ -135,12 +135,7 @@ export default {
           // console.log("传出的" + response.data);
           console.log('register')
           console.log(response.data)
-          if(response.data==''){
-            this.$message({
-              type: "error",
-              message: "Wrong Account or Wrong Password !",
-            });
-          }else if (response.data[0] !== "-1")
+          if (response.data[0] !== "-1")
             this.$message({
               type: "success",
               message: "Login Successfully !",

@@ -64,7 +64,7 @@
 }
 
 .button {
-  padding: 5;
+  padding: 5px;
   float: left;
 }
 
