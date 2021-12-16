@@ -3,10 +3,10 @@
     <div>
       <!--编辑课程信息按钮区域-->
       <el-button class="btn" @click="saveEdit">
-        <span>保存</span>
+        <span>Save</span>
       </el-button>
       <el-button class="btn" type="danger" @click="cancelEdit" plain>
-        <span>取消</span>
+        <span>Cancel</span>
       </el-button>
     </div>
     <div>
@@ -16,7 +16,7 @@
         type="border-card"
         @tab-click="handleClick"
       >
-        <el-tab-pane label="课程设置">
+        <el-tab-pane label="Course Setting">
           <el-container style="height: 480px">
             <div class="uploadArea">
               <!--上传课程头像-->
@@ -35,15 +35,15 @@
               </el-upload>
               <!--课程头像上传建议-->
               <div class="tips">
-                <br /><br /><span>仅支持*******格式图片</span><br />
-                <span>建议最佳尺寸*****，不超过***</span>
+                <br /><br /><span></span><br />
+                <span></span>
               </div>
             </div>
             <div class="editArea">
-              <h2>课程信息</h2>
+              <h2>Course Information</h2>
               <!--课程信息表单-->
               <el-form>
-                <el-form-item label="课程编号">
+                <el-form-item label="Course ID">
                   <el-input
                     class="inputInfo"
                     v-model="this.$route.params.course_id"
@@ -51,7 +51,7 @@
                   >
                   </el-input>
                 </el-form-item>
-                <el-form-item label="责任教师">
+                <el-form-item label="Responsible Teacher's ID">
                   <el-input
                     v-model="this.$route.params.course_teacher_ID"
                     :disabled="true"
@@ -59,10 +59,10 @@
                   >
                   </el-input>
                 </el-form-item>
-                <el-form-item label="课程名称">
+                <el-form-item label="Course Name">
                   <el-input v-model="tmpName" style="width: 400px"> </el-input>
                 </el-form-item>
-                <el-form-item label="课程介绍">
+                <el-form-item label="Introduction">
                   <el-input
                     v-model="tmpDes"
                     :rows="4"
@@ -76,8 +76,8 @@
             </div>
           </el-container>
         </el-tab-pane>
-        <el-tab-pane label="教师团队"> </el-tab-pane>
-        <el-tab-pane label="助教团队"> </el-tab-pane>
+        <el-tab-pane label="Teachers"> </el-tab-pane>
+        <el-tab-pane label="Teaching Assistants"> </el-tab-pane>
       </el-tabs>
     </div>
   </div>
@@ -118,7 +118,7 @@ export default {
           console.log(response.data);
           this.$message({
             type: "success",
-            message: "修改成功!",
+            message: "Successful!",
           });
           this.$router.push({ name: "info" });
         })
@@ -126,7 +126,7 @@ export default {
           console.log(error);
           this.$message({
             type: "error",
-            message: "修改失败!请重试！",
+            message: "Fail to edit! Please try again!",
           });
         });
     },
@@ -151,19 +151,19 @@ export default {
         if(response.data === 1){
           this.$message({
             type: "success",
-            message: "修改成功！",
+            message: "Successful!",
           });
         }
         else{
           this.$message({
             type: "error",
-            message: "修改失败！请重试！",
+            message: "Fail to edit! Please try again!",
           });
         }
       }).catch(()=>{
         this.$message({
           type: "error",
-          message: "修改失败！请重试！",
+          message: "Fail to edit! Please try again!",
         });
       })
     },
@@ -171,7 +171,7 @@ export default {
     beforeUpload(file) {
       const isJPG = file.type === 'image/jpeg';
       if (!isJPG) {
-        this.$message.error('上传头像图片只能是 JPG 格式!');
+        this.$message.error('JPG only!');
       }
       return isJPG;
     }

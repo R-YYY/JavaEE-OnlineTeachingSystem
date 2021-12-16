@@ -6,7 +6,7 @@
         :default-sort = "{prop: 'start_time', order: 'descending'}"
     >
       <el-table-column style="padding-left: 20px;font-size: 17px" prop="start_time"
-          label="时间"
+          label="Time"
           sortable
           width="500">
         <template slot-scope="scope">
@@ -15,9 +15,9 @@
       </el-table-column>
       <el-table-column>
         <template slot-scope="scope">
-          <div :class="[{'success':(scope.row.attend_type === '出勤')},
-                {'danger':(scope.row.attend_type === '缺勤')},
-                {'normal':(scope.row.attend_type === '待考勤')}
+          <div :class="[{'success':(scope.row.attend_type === 'Attended')},
+                {'danger':(scope.row.attend_type === 'Absent')},
+                {'normal':(scope.row.attend_type === 'To be recorded')}
                 ]"
               @click="btnClick(scope.row.attend_type,scope.row.start_time)">{{ scope.row.attend_type }}</div>
         </template>
@@ -58,7 +58,7 @@ export default {
   },
   methods:{
     btnClick(type,start_time) {
-      if(type==='出勤'||type==='缺勤'){
+      if(type==='Attended'||type==='Absent'){
 
       }
       else{
@@ -79,22 +79,22 @@ export default {
             .then((response) => {
               console.log(response.data);
               if (response.data === 1) {
-                this.$alert('考勤成功！', '', {
-                  confirmButtonText: '确定',
+                this.$alert('Successful！', '', {
+                  confirmButtonText: 'Confirm',
                   type: 'success'
                 });
                 this.reload();    //调用刷新
               } else {
                 this.$message({
                   type: "error",
-                  message: "已考勤！",
+                  message: "Attended！",
                 });
               }
             })
             .catch(() => {
               this.$message({
                 type: "error",
-                message: "考勤失败！请重试！",
+                message: "Fail to record! Please try again!",
               });
             });
       }

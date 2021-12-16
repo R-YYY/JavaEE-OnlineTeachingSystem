@@ -3,12 +3,12 @@
     <el-tabs class="stuTab" v-model="activeName" @tab-click="handleClick">
 
       <el-tab-pane name="normalStudent">
-        <span slot="label" class="paneName"><i class="el-icon-user-solid"></i> 学生</span>
+        <span slot="label" class="paneName"><i class="el-icon-user-solid"></i> Student</span>
         <NormalStudent v-bind:course_id="course_ID"></NormalStudent>
       </el-tab-pane>
 
       <el-tab-pane name="TA">
-        <span slot="label" class="paneName"><i class="el-icon-s-custom"></i> 助教</span>
+        <span slot="label" class="paneName"><i class="el-icon-s-custom"></i> Teaching Assistant</span>
         <TA v-bind:course_id="course_ID"></TA>
       </el-tab-pane>
     </el-tabs>

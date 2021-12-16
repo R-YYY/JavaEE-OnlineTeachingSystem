@@ -1,7 +1,7 @@
 <template>
   <el-container style="height: 100%">
     <el-header style="height: 10%">
-      <h1 class="title">口v口 Experiment Teaching System 口∧口</h1>
+      <h1 class="title">Online Teaching System</h1>
     </el-header>
     <el-container>
       <!--主页侧边栏-->
@@ -22,27 +22,27 @@
           >
             <el-menu-item class="option" index="1" @click="toCourse">
               <i class="el-icon-reading"></i>
-              <span>课程管理</span>
+              <span>COURSE</span>
             </el-menu-item>
             <el-menu-item class="option" index="2" @click="toStudent">
               <i class="el-icon-user"></i>
-              <span>学生管理</span>
+              <span>STUDENT</span>
             </el-menu-item>
             <el-menu-item class="option" index="3" @click="toTask">
               <i class="el-icon-document-copy"></i>
-              <span>学习任务</span>
+              <span>TASK</span>
             </el-menu-item>
             <el-menu-item class="option" index="4" @click="toGrade">
               <i class="el-icon-finished"></i>
-              <span>成绩管理</span>
+              <span>GRADE</span>
             </el-menu-item>
             <el-menu-item class="option" index="5" @click="toFile">
               <i class="el-icon-folder-opened"></i>
-              <span>学习资料</span>
+              <span>FILE</span>
             </el-menu-item>
             <el-menu-item class="option" index="6" @click="toFeedback">
               <i class="el-icon-edit-outline"></i>
-              <span>课程反馈</span>
+              <span>FEEDBACK</span>
             </el-menu-item>
           </el-menu>
         </div>

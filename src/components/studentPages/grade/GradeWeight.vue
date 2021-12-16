@@ -33,7 +33,7 @@ export default {
       };
       myChart.setOption({
         title: {
-          text: '课程成绩比例',
+          text: 'Grade Percentage',
           left: 'center'
         },
         tooltip: {
@@ -45,12 +45,12 @@ export default {
         },
         series: [
           {
-            name: '比例（%）',
+            name: 'Percentage（%）',
             type: 'pie',
             radius: '50%',
             data: [
-              { value: a_percentage, name: '考勤' },
-              { value: p_percentage, name: '实验' },
+              { value: a_percentage, name: 'Attendance' },
+              { value: p_percentage, name: 'Project' },
             ],
             emphasis: {
               itemStyle: {

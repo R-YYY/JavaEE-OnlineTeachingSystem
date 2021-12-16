@@ -9,7 +9,7 @@
         value="task"
       >
         <!--中间的大框框-->
-        <el-tab-pane label="发布任务" name="task">
+        <el-tab-pane label="Release Task" name="task">
           <el-container style="height: 480px">
             <div class="typeCard">
               <!--发布实验卡片-->
@@ -20,7 +20,7 @@
               >
                 <i class="el-icon-s-cooperation"></i><br />
                 <div class="choice">
-                  <p>发布实验项目</p>
+                  <p>Release Project</p>
                 </div>
               </el-card>
             </div>
@@ -33,19 +33,19 @@
               >
                 <i class="el-icon-user-solid"></i><br />
                 <div class="choice">
-                  <p>发布课程考勤</p>
+                  <p>Release Attendance Survey</p>
                 </div>
               </el-card>
             </div>
           </el-container>
         </el-tab-pane>
-        <el-tab-pane label="实验项目" name="project"> </el-tab-pane>
-        <el-tab-pane label="课程考勤" name="attendance"> </el-tab-pane>
+        <el-tab-pane label="Project" name="project"> </el-tab-pane>
+        <el-tab-pane label="Attendance" name="attendance"> </el-tab-pane>
       </el-tabs>
 
       <!--填写实验项目信息-->
       <el-dialog
-        title="发布实验项目信息"
+        title="Release Project"
         :visible.sync="projectDialogVisible"
         width="680px"
       >
@@ -56,27 +56,27 @@
           :model="projectInfo"
           label-width="80px"
         >
-          <el-form-item label="项目名称" prop="name">
+          <el-form-item label="Name" prop="name">
             <el-input
               v-model="projectInfo.name"
               autocomplete="off"
               style="width: 550px"
             ></el-input>
           </el-form-item>
-          <el-form-item label="有效时间" required prop="time">
+          <el-form-item label="Time" required prop="time">
             <el-date-picker
               v-model="projectInfo.time"
               type="datetimerange"
               align="right"
-              start-placeholder="开始时间"
-              end-placeholder="结束时间"
+              start-placeholder="Start Time"
+              end-placeholder="End Time"
               :default-time="['00:00:00', '23:59:59']"
               value-format="yyyy-MM-dd HH:mm:ss"
               style="width: 550px"
             >
             </el-date-picker>
           </el-form-item>
-          <el-form-item label="项目描述" prop="description">
+          <el-form-item label="Description" prop="description">
             <el-input
               v-model="projectInfo.description"
               autocomplete="off"
@@ -85,7 +85,7 @@
               style="width: 550px"
             ></el-input>
           </el-form-item>
-          <el-form-item label="附加文件">
+          <el-form-item label="Add File">
             <!--上传文件区域-->
             <el-upload
               ref="projectUploadFile"
@@ -99,49 +99,49 @@
               :http-request="uploadProjectFile"
             >
               <el-button slot="trigger" size="mini" type="primary"
-                >选取文件</el-button
+                >Choose</el-button
               >
               <div slot="tip" class="el-upload__tip">
-                最多上传3个文件，且每个文件大小不超过5MB
+                Maximum file number:3; maximum file size: 5MB
               </div>
             </el-upload>
           </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
-          <el-button class="btn_dialog" @click="resetProject">重置</el-button>
+          <el-button class="btn_dialog" @click="resetProject">Reset</el-button>
           <el-button class="btn_dialog" @click="projectDialogVisible = false"
-            >暂存</el-button
+            >Save</el-button
           >
           <el-button class="btn_dialog" type="primary" @click="submitProject"
-            >发布</el-button
+            >Release</el-button
           >
         </div>
       </el-dialog>
 
       <!--填写考勤信息-->
       <el-dialog
-        title="发布考勤信息"
+        title="Release Attendance Survey"
         :visible.sync="attendanceDialogVisible"
         width="520px"
         style="margin-top: 100px"
       >
         <div>
           <!--开始时间到结束时间，控件自动检测时间先后-->
-          <span style="margin-left: 20px; margin-right: 30px">考勤时间</span>
+          <span style="margin-left: 20px; margin-right: 30px">Time</span>
           <el-time-picker
             is-range
             v-model="attendanceTime"
-            range-separator="至"
-            start-placeholder="开始时间"
-            end-placeholder="结束时间"
-            placeholder="选择时间范围"
+            range-separator="to"
+            start-placeholder="Start Time"
+            end-placeholder="End Time"
+            placeholder="Choose duration"
             value-format="yyyy-MM-dd HH:mm:ss"
           >
           </el-time-picker>
         </div>
         <div slot="footer" class="dialog-footer">
-          <el-button @click="attendanceDialogVisible = false">取 消</el-button>
-          <el-button type="primary" @click="submitAttendance">确 定</el-button>
+          <el-button @click="attendanceDialogVisible = false">Cancel</el-button>
+          <el-button type="primary" @click="submitAttendance">Confirm</el-button>
         </div>
       </el-dialog>
     </div>
@@ -165,12 +165,12 @@ export default {
       },
       projectRules: {
         //实验项目表单验证规则
-        name: [{ required: true, message: "请填写项目名称", trigger: "blur" }],
+        name: [{ required: true, message: "Please enter the project's name", trigger: "blur" }],
         time: [
-          { required: true, message: "请选择项目有效时间", trigger: "blur" },
+          { required: true, message: "Please enter the project's validation time", trigger: "blur" },
         ],
         description: [
-          { required: true, message: "请填写项目描述", trigger: "blur" },
+          { required: true, message: "Please enter the description", trigger: "blur" },
         ],
       },
 
@@ -199,9 +199,9 @@ export default {
     //文件超出可选范围
     handleExceed(files, fileList) {
       this.$message.warning(
-        `当前限制选择 3 个文件，本次选择了 ${files.length} 个文件，共选择了 ${
+        `File number limit:3; you have selected ${files.length} files，${
           files.length + fileList.length
-        } 个文件`
+        } in total`
       );
     },
 
@@ -248,7 +248,7 @@ export default {
               if (response.data === 1) {
                 this.$message({
                   type: "success",
-                  message: "发布成功！",
+                  message: "Successful！",
                 });
                 //重置表单
                 this.resetProject();
@@ -258,19 +258,19 @@ export default {
               else if (response.data === -1) {
                 this.$message({
                   type: "error",
-                  message: "发布失败！请检查实验名是否与往期实验名有重复！",
+                  message: "Fail to release! Please check if the project's name is identical to previous ones!",
                 });
               } else if (response.data === -2) {
                 this.$message({
                   type: "error",
-                  message: "文件上传失败！请重试！",
+                  message: "Fail to upload! Please try again!",
                 });
               }
             })
             .catch(() => {
               this.$message({
                 type: "error",
-                message: "发布失败！请重试！",
+                message: "Fail to release! Please try again!",
               });
             });
         }
@@ -299,19 +299,19 @@ export default {
             this.attendanceDialogVisible = false;
             this.$message({
               type: "success",
-              message: "发布成功！",
+              message: "Successful",
             });
           } else {
             this.$message({
               type: "error",
-              message: "已发布过此考勤！",
+              message: "Attendance survey was released before!",
             });
           }
         })
         .catch(() => {
           this.$message({
             type: "error",
-            message: "发布失败！请重试！",
+            message: "Fail to release! Please try again!",
           });
         });
     },

@@ -29,14 +29,14 @@ export default {
       let remain=100-a_score-p_score;
       var data_list=[];
       if(a_score>0){
-        var obj={ value: a_score, name: '考勤分数'+a_score };
+        var obj={ value: a_score, name: 'Attendance Grade'+a_score };
         data_list.push(obj);
       }
       if(p_score>0){
-        var obj={ value: p_score, name: '实验分数'+p_score };
+        var obj={ value: p_score, name: 'Project Grade'+p_score };
         data_list.push(obj);
       }
-      data_list.push({ value: remain, name: '未得分数' });
+      data_list.push({ value: remain, name: 'Grade loss' });
       // 基于准备好的dom，初始化echarts实例
       var myChart = echarts.init(document.getElementById('shape3'));
       window.onresize = function() {
@@ -44,7 +44,7 @@ export default {
       };
       myChart.setOption({
         title: {
-          text: '总成绩   ' + total,
+          text: 'Total Grade   ' + total,
           left: 'center'
         },
         tooltip: {

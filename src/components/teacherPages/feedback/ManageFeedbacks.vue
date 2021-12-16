@@ -4,15 +4,15 @@
       <el-input
         class="inputFeedbackName"
         v-model="input"
-        placeholder="请输入反馈人姓名"
+        placeholder="Please enter the feedbacker's name"
       >
       </el-input>
-      <el-button type="primary" plain>搜索</el-button>
+      <el-button type="primary" plain>Search</el-button>
     </div>
     <div>
       <el-tabs class="feedbackTab" type="border-card">
-        <el-tab-pane label="课程反馈">
-          <el-empty description="没有反馈" style="height: 480px"></el-empty>
+        <el-tab-pane label="Course Feedback">
+          <el-empty description="NONE" style="height: 480px"></el-empty>
         </el-tab-pane>
       </el-tabs>
     </div>

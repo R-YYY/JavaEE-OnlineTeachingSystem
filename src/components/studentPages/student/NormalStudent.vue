@@ -5,17 +5,17 @@
         stripe style="width: 100%;font-size: 16px">
       <el-table-column
           prop="student_ID"
-          label="学号"
+          label="ID"
           width="200">
       </el-table-column>
       <el-table-column
           prop="name"
-          label="姓名"
+          label="Name"
           width="200">
       </el-table-column>
       <el-table-column
           prop="email"
-          label="邮箱">
+          label="E-mail">
       </el-table-column>
     </el-table>
   </div>

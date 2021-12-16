@@ -5,14 +5,14 @@
         <el-input
           class="inputFileName"
           v-model="input"
-          placeholder="请输入查找文件名称"
+          placeholder="Please enter the file name"
         >
         </el-input>
-        <el-button>搜索</el-button>
+        <el-button>Search</el-button>
         <el-tooltip
           class="item"
           effect="dark"
-          content="仅可在二级目录内上传文件"
+          content="You can only upload files in the secondary catalogue"
           placement="right"
         >
           <el-upload
@@ -23,7 +23,7 @@
             :disabled="!showOperation()"
             :http-request="handleUpload"
           >
-            <el-button :disabled="!showOperation()">上传文件</el-button>
+            <el-button :disabled="!showOperation()">Upload</el-button>
 
           </el-upload>
         </el-tooltip>
@@ -31,7 +31,7 @@
     </div>
     <div>
       <el-tabs class="fileTab" type="border-card">
-        <el-tab-pane label="课程资料">
+        <el-tab-pane label="Course Materials">
           <el-container style="height: 480px">
             <div>
               <div class="pathArea">
@@ -71,32 +71,32 @@
                 <el-table-column
                   prop="file_name"
                   sortable
-                  label="文件名"
+                  label="Name"
                   width="300px"
                 >
                 </el-table-column>
                 <el-table-column
                   prop="submit_time"
-                  label="上传时间"
+                  label="Upload Time"
                   width="180px"
                   sortable
                 >
                 </el-table-column>
                 <el-table-column
                   prop="file_size"
-                  label="文件大小"
+                  label="Size"
                   width="100px"
                   sortable
                 >
                 </el-table-column>
-                <el-table-column width="180px" label="操作" align="center">
+                <el-table-column width="180px" label="Operation" align="center">
                   <template slot-scope="scope">
                     <el-button
                         type="text"
                         v-if="!showOperation()"
                         @click="showFiles(scope.row)"
                     >
-                      打开文件夹
+                      Open
                     </el-button>
                     <el-button
                         type="text"
@@ -104,13 +104,13 @@
                         style="margin-right: 20px"
                         @click="handleDownload(scope.row)"
                     >
-                      下载文件
+                      Download
                     </el-button>
                     <el-button
                         type="text"
                         v-if="showOperation()"
                         @click="handleDelete(scope.row)"
-                    >删除文件
+                    >Delete
                     </el-button>
                   </template>
                 </el-table-column>
@@ -130,7 +130,7 @@ export default {
     return {
       input: "",
       courseName: "",
-      filePath: "/课程资料",
+      filePath: "/Course Materials",
       fileList: [],
       totalFiles: [],
       defaultProps: {
@@ -177,7 +177,7 @@ export default {
     handleUpload(file) {
       this.$message({
         type: "danger",
-        message: file.file.name + " 上传？",
+        message: file.file.name + " Upload？",
       });
       let data = new FormData();
       data.append("course_ID", this.$route.params.course_id);
@@ -197,7 +197,7 @@ export default {
           if (response.data === 1) {
             this.$message({
               type: "success",
-              message: file.file.name + " 上传成功！",
+              message: file.file.name + " Successful！",
             });
             this.fileList.push({
               file_name: file.file.name,
@@ -207,14 +207,14 @@ export default {
           } else {
             this.$message({
               type: "error",
-              message: "上传失败！请重试！",
+              message: "Fail to upload! Please try again!",
             });
           }
         })
         .catch(() => {
           this.$message({
             type: "error",
-            message: "上传失败！请重试！",
+            message: "Fail to upload! Please try again!",
           });
         });
     },
@@ -252,19 +252,19 @@ export default {
             this.fileList.splice(data, 1);
             this.$message({
               type: "success",
-              message: "删除成功!",
+              message: "Successful!",
             });
           } else {
             this.$message({
               type: "error",
-              message: "删除失败!请重试！",
+              message: "Fail to delete! Please try again!",
             });
           }
         })
         .catch(() => {
           this.$message({
             type: "error",
-            message: "删除失败!请重试！",
+            message: "Fail to delete! Please try again!",
           });
         });
     },
@@ -346,11 +346,11 @@ export default {
       .then((response) => {
         this.totalFiles.push(
           {
-            label: "课程资料",
+            label: "Course Materials",
             children: this.childrenFiles(response.data[0]),
           },
           {
-            label: "实验资料",
+            label: "Experiment Materials",
             children: this.childrenFiles(response.data[1]),
           }
         );

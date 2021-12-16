@@ -8,7 +8,7 @@
       <el-container>
         <img class="courseImg" src="../../../src/assets/course.png" alt="加载失败">
         <span class="courseTitle">
-          {{courseName}}<br>课程编号：{{courseID}}
+          {{courseName}}<br>Course ID：{{courseID}}
         </span>
         <el-container class="timeArea">
           <el-card class="time">{{ parseInt(date.getHours()/10) }}</el-card>
@@ -23,23 +23,23 @@
     <el-menu class="menu" :default-active="activeIndex" mode="horizontal" background-color="#746ec9" text-color="#fff" active-text-color="#fff">
 
       <el-menu-item index="1" class="stuOption" @click="toTask">
-        <span>学习任务</span>
+        <span>Task</span>
       </el-menu-item>
 
       <el-menu-item index="2" class="stuOption" @click="toFile">
-        <span>课程资料</span>
+        <span>Course Material</span>
       </el-menu-item>
 
       <el-menu-item index="3" class="stuOption" @click="toStudent">
-        <span>课程学生</span>
+        <span>Student List</span>
       </el-menu-item>
 
       <el-menu-item index="4" class="stuOption" @click="toGrade">
-        <span>课程成绩</span>
+        <span>Grade</span>
       </el-menu-item>
 
       <el-menu-item index="5" class="stuOption" @click="toFeedback">
-        <span>课程反馈</span>
+        <span>Feedback</span>
       </el-menu-item>
 
     </el-menu>
@@ -52,19 +52,19 @@
       <div class="courseInfoArea">
         <el-card class="courseInfo" shadow="never">
           <div slot="header">
-            <span style="font-size: 20px">授课教师</span>
+            <span style="font-size: 20px">Teacher</span>
           </div>
 
           <el-card shadow="hover" v-for="info in teacher_list" style="margin-bottom: 14px">
-            <p>姓名：{{info.name}}</p>
-            <p>邮箱: {{info.email}}</p>
+            <p>Name：{{info.name}}</p>
+            <p>E-mail: {{info.email}}</p>
           </el-card>
         </el-card>
 
 
         <el-card class="courseInfo" shadow="never">
           <div slot="header">
-            <span style="font-size: 20px">课程信息</span>
+            <span style="font-size: 20px">Course Information</span>
           </div>
           <div>
 <!--            <p>{{course.course_ID}}</p>-->
@@ -84,7 +84,7 @@ export default {
   data(){
     return {
       date:new Date(),
-      courseName:'软工',
+      courseName:'Java EE',
       courseID: '42024401',
       student_ID:'1951014',
       activeIndex: '',

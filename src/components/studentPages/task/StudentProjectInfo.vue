@@ -4,12 +4,12 @@
     <div class="backButton">
 <!--      <el-button type="primary" @click="goBack">返回</el-button>-->
     </div>
-    <div class="end_time">截止时间 : {{project.end_time}}</div>
+    <div class="end_time">Deadline : {{project.end_time}}</div>
 
     <div class="contents">
       <el-card class="description" shadow="never">
         <div slot="header" class="clearfix">
-          <span style="font-weight: bolder">实验项目说明 ：</span>
+          <span style="font-weight: bolder">Description ：</span>
         </div>
         <div class="text item">
           {{project.description}}
@@ -18,16 +18,16 @@
 
       <el-card class="description" shadow="never">
         <div slot="header" class="clearfix">
-          <span style="font-weight: bolder">文件 ： </span>
+          <span style="font-weight: bolder">File ： </span>
         </div>
         <div class="text item" v-for="i in 4">
-          文件{{i}}
+          File{{i}}
         </div>
       </el-card>
 
       <el-card class="description" shadow="never">
         <div slot="header" class="clearfix">
-          <span style="font-weight: bolder">实验报告 ： </span>
+          <span style="font-weight: bolder">Report ： </span>
         </div>
         <el-upload
             class="upload-demo"
@@ -40,11 +40,11 @@
             :file-list="fileList"
             :limit="2"
             >
-          <el-button slot="trigger" size="medium" type="primary">选取文件</el-button>
-          <div slot="tip" class="el-upload__tip">只能上传docx/doc/pdf文件，且不超过10Mb</div>
+          <el-button slot="trigger" size="medium" type="primary">Add File</el-button>
+          <div slot="tip" class="el-upload__tip">docx/doc/pdf files only (no larger than 10Mb)</div>
           <el-button type="primary" icon="el-icon-upload2"
                      plain size="medium" style="float: right;margin-right: 100px"
-                     @click="submit">上传</el-button>
+                     @click="submit">Submit</el-button>
         </el-upload>
       </el-card>
     </div>
@@ -85,7 +85,7 @@ export default {
           if (response.data === 1) {
             this.$message({
               type: "success",
-              message: file.file.name + " 上传成功！",
+              message: file.file.name + " is uploaded successfully!",
             });
             this.fileList[0].file_name=file.file_name;
             this.fileList[0].submit_time=this.getDateYYYYMMddHHMMSS();
@@ -94,13 +94,13 @@ export default {
           else {
             this.$message({
               type: "error",
-              message: "上传失败！请重试！",
+              message: "Fail to upload! Please try again!",
             });
           }
         }).catch(() => {
               this.$message({
                 type: "error",
-                message: "上传失败！请重试！",
+                message: "Fail to upload! Please try again!",
               });
             });
       }
@@ -116,7 +116,7 @@ export default {
               if (response.data === 1) {
                 this.$message({
                   type: "success",
-                  message: file.file.name + " 上传成功！",
+                  message: file.file.name + " is uploaded successfully!",
                 });
                 this.fileList.push({
                   file_name: file.file.name,
@@ -127,14 +127,14 @@ export default {
               else {
                 this.$message({
                   type: "error",
-                  message: "上传失败！请重试！",
+                  message: "Fail to upload! Please try again!",
                 });
               }
             })
             .catch(() => {
               this.$message({
                 type: "error",
-                message: "上传失败！请重试！",
+                message: "Fail to upload! Please try again!",
               });
             });
       }

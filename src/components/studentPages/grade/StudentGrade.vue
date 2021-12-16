@@ -3,17 +3,17 @@
     <el-tabs class="stuGradeTab" v-model="activeName" @tab-click="handleClick">
 
       <el-tab-pane name="total">
-        <span slot="label" class="paneName"><i class="el-icon-user-solid"></i> 成绩权重</span>
+        <span slot="label" class="paneName"><i class="el-icon-user-solid"></i> Grade Weighting</span>
         <TotalGrade v-bind:course_id="course_id"></TotalGrade>
       </el-tab-pane>
 
       <el-tab-pane name="project">
-        <span slot="label" class="paneName"><i class="el-icon-edit-outline"></i> 实验项目成绩</span>
+        <span slot="label" class="paneName"><i class="el-icon-edit-outline"></i> Project Grade</span>
         <ProjectGrade v-bind:course_id="course_id"></ProjectGrade>
       </el-tab-pane>
 
       <el-tab-pane name="attendance">
-        <span slot="label" class="paneName"><i class="el-icon-date"></i> 总成绩</span>
+        <span slot="label" class="paneName"><i class="el-icon-date"></i> Total Grade</span>
         <AttendanceGrade v-bind:course_id="course_id"></AttendanceGrade>
       </el-tab-pane>
     </el-tabs>

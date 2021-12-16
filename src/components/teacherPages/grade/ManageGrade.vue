@@ -1,9 +1,9 @@
 <template>
   <div>
     <div>
-      <el-input class="inputProject" placeholder="请输入学生姓名"></el-input>
-      <el-button>搜索</el-button>
-      <el-button>导出成绩</el-button>
+      <el-input class="inputProject" placeholder="Please enter the student's name"></el-input>
+      <el-button>Search</el-button>
+      <el-button>Export</el-button>
     </div>
     <div>
       <el-tabs
@@ -12,7 +12,7 @@
         type="border-card"
         @tab-click="handleClick"
       >
-        <el-tab-pane label="总成绩" name="total">
+        <el-tab-pane label="Total Grade" name="total">
           <div style="height: 480px">
             <el-table
               :data="totalGradeList"
@@ -23,42 +23,42 @@
             >
               <el-table-column
                 prop="student_ID"
-                label="学号"
+                label="ID"
                 width="180px"
                 sortable
               ></el-table-column>
               <el-table-column
                 prop="name"
-                label="姓名"
+                label="Name"
                 width="180px"
                 sortable
               ></el-table-column>
               <el-table-column
                 prop="project_score"
-                label="实验成绩"
+                label="Experiment Grade"
                 width="190px"
                 sortable
               ></el-table-column>
               <el-table-column
                 prop="attend_score"
-                label="考勤成绩"
+                label="Attendance Grade"
                 width="190px"
                 sortable
               ></el-table-column>
               <el-table-column
                 prop="total_score"
-                label="总成绩"
+                label="Total Grade"
                 width="190px"
                 sortable
               ></el-table-column>
               <el-table-column width="140px">
-                <el-button type="text">查看详情</el-button>
+                <el-button type="text">Details</el-button>
               </el-table-column>
             </el-table>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="单项成绩" name="part"></el-tab-pane>
-        <el-tab-pane label="设置成绩权重" name="set"></el-tab-pane>
+        <el-tab-pane label="Single Grade" name="part"></el-tab-pane>
+        <el-tab-pane label="Set Grade Weighting" name="set"></el-tab-pane>
       </el-tabs>
     </div>
   </div>

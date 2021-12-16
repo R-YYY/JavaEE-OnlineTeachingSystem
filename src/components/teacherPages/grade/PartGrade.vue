@@ -1,8 +1,8 @@
 <template>
   <div>
     <div>
-      <el-input class="inputProject" placeholder="请输入项目名称"></el-input>
-      <el-button>搜索</el-button>
+      <el-input class="inputProject" placeholder="Please enter the project's name"></el-input>
+      <el-button>Search</el-button>
     </div>
     <div>
       <el-tabs
@@ -11,14 +11,14 @@
         type="border-card"
         @tab-click="handleClick"
       >
-        <el-tab-pane label="总成绩" name="total"></el-tab-pane>
-        <el-tab-pane label="单项成绩" name="part" style="overflow: auto">
+        <el-tab-pane label="Total Grade" name="total"></el-tab-pane>
+        <el-tab-pane label="Single Grade" name="part" style="overflow: auto">
           <div class="gradeShow">
             <el-collapse>
               <el-card class="gradeCard">
                 <el-collapse-item>
                   <template slot="title">
-                    <span style="font-size: 20px"><b>实验项目</b></span>
+                    <span style="font-size: 20px"><b>Experiment</b></span>
                   </template>
                   <el-table
                     :data="projectInfoList"
@@ -27,30 +27,30 @@
                     :cell-style="{ padding: '0' }"
                   >
                     <el-table-column
-                      label="实验名称"
+                      label="Name"
                       prop="project_name"
                       width="400px"
                     ></el-table-column>
                     <el-table-column
-                      label="平均分"
+                      label="Average Grade"
                       prop="avg_score"
                       width="150px"
                       sortable
                     ></el-table-column>
                     <el-table-column
-                      label="最低分"
+                      label="Lowest Grade"
                       prop="min_score"
                       width="150px"
                       sortable
                     ></el-table-column>
                     <el-table-column
-                      label="最高分"
+                      label="Highest Grade"
                       prop="max_score"
                       width="150px"
                       sortable
                     ></el-table-column>
                     <el-table-column align="center">
-                      <el-button type="text">查看详情</el-button>
+                      <el-button type="text">Details</el-button>
                     </el-table-column>
                   </el-table>
                 </el-collapse-item>
@@ -58,7 +58,7 @@
               <el-card class="gradeCard">
                 <el-collapse-item>
                   <template slot="title">
-                    <span style="font-size: 20px"><b>考勤</b></span>
+                    <span style="font-size: 20px"><b>Attendance</b></span>
                   </template>
                   <el-table
                       :data="attendanceInfoList"
@@ -67,27 +67,27 @@
                       :cell-style="{ padding: '0' }">
                     <el-table-column
                       type="index"
-                      label="序号"
+                      label="Index"
                       width="150px"
                     ></el-table-column>
                     <el-table-column
                       prop="start_time"
-                      label="开始时间"
+                      label="Start Time"
                       width="250px"
                       sortable
                     ></el-table-column>
                     <el-table-column
                       prop="end_time"
-                      label="结束时间"
+                      label="End Time"
                       width="250px"
                     ></el-table-column>
                     <el-table-column
                       prop="number"
-                      label="考勤人数"
+                      label="Attended Num"
                       width="200px"
                     ></el-table-column>
                     <el-table-column align="center">
-                      <el-button type="text">查看详情</el-button>
+                      <el-button type="text">Details</el-button>
                     </el-table-column>
                   </el-table>
                 </el-collapse-item>
@@ -95,7 +95,7 @@
             </el-collapse>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="设置成绩权重" name="set"></el-tab-pane>
+        <el-tab-pane label="Set Grade Weighting" name="set"></el-tab-pane>
       </el-tabs>
     </div>
   </div>

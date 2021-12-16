@@ -4,12 +4,12 @@
       <el-input
         class="searchProject"
         v-model="input"
-        placeholder="请输入项目名称"
+        placeholder="Please enter the project's name"
         @input="searchProject"
       >
       </el-input>
       <el-button type="primary" @click="searchProject">
-        <span>搜索</span>
+        <span>Search</span>
       </el-button>
     </div>
     <div>
@@ -19,8 +19,8 @@
         @tab-click="handleClick"
         value="project"
       >
-        <el-tab-pane label="发布任务" name="task"> </el-tab-pane>
-        <el-tab-pane label="实验项目" name="project">
+        <el-tab-pane label="Release Task" name="task"> </el-tab-pane>
+        <el-tab-pane label="Project" name="project">
           <!--实验信息卡片列表-->
           <div class="projectArea">
             <el-row>
@@ -33,19 +33,19 @@
                 <div class="eachProject">
                   <el-card class="projectCard">
                     <div slot="header" class="projectName">
-                      <span>实验名称：{{ item.name }}</span>
+                      <span>Name：{{ item.name }}</span>
                     </div>
                     <div class="projectDes">
-                      <p>发布人：{{ item.teacher_name }}</p>
-                      <p>发布时间：{{ item.start_time }}</p>
-                      <p>截至时间：{{ item.end_time }}</p>
+                      <p>Releaser：{{ item.teacher_name }}</p>
+                      <p>Released Time：{{ item.start_time }}</p>
+                      <p>Deadline：{{ item.end_time }}</p>
                     </div>
                     <div>
                       <el-button class="btn" @click="checkProject(item.name)">
-                        <span>查看实验信息</span>
+                        <span>Project Information</span>
                       </el-button>
                       <el-button class="btn" @click="checkReport(item.name)">
-                        <span>查看提交情况</span>
+                        <span>Submissions</span>
                       </el-button>
                     </div>
                   </el-card>
@@ -68,11 +68,11 @@
               <el-input
                 class="searchReport"
                 v-model="input"
-                placeholder="请输入学生学号或姓名或报告名称"
+                placeholder="Please enter ID/student name/report name"
               >
               </el-input>
               <el-button type="primary">
-                <span>搜索</span>
+                <span>Search</span>
               </el-button>
             </div>
             <el-table
@@ -81,77 +81,76 @@
                 :row-style="{ height: '50px' }"
                 :cell-style="{ padding: '0' }">
               <el-table-column
-                label="学号"
+                label="ID"
                 prop="student_ID"
                 width="80px"
                 sortable
               ></el-table-column>
               <el-table-column
-                label="姓名"
+                label="Name"
                 prop="name"
                 width="80px"
                 sortable
               ></el-table-column>
               <el-table-column
-                label="提交时间"
+                label="Submission Time"
                 prop="submit_time"
                 sortable
                 width="150px"
               ></el-table-column>
-              <el-table-column label="提交报告" sortable width="230px"
+              <el-table-column label="Report" sortable width="230px"
                 ><template slot-scope="scope">
-                <el-tooltip content="点击下载" placement="top">
+                <el-tooltip content="Click to download" placement="top">
                   <a class="reportSrc">{{ scope.row.report_name }}</a>
                 </el-tooltip>
                 </template>
               </el-table-column>
               <el-table-column
-                label="批改状态"
+                label="Status"
                 prop="correct_state"
                 align="center"
                 width="90px"
                 :filters="[
-                  { text: '已批改', value: '已批改' },
-                  { text: '未批改', value: '未批改' },
+                  { text: 'Marked', value: 'Marked' },
+                  { text: 'Unmarked', value: 'Unmarked' },
                 ]"
                 :filter-method="filterState"
               >
                 <template slot-scope="scope">
                   <el-tag
-                    :type="scope.row.correct_state === '已批改'? 'success':'danger'"
+                    :type="scope.row.correct_state === 'Marked'? 'success':'danger'"
                     disable-transitions
                     >{{ scope.row.correct_state }}</el-tag>
                 </template>
               </el-table-column>
-              <el-table-column label="评分" width="85px" align="center" sortable>
+              <el-table-column label="Grade" width="85px" align="center" sortable>
                 <template slot-scope="scope">
                   <span v-if="scope.row.is_correct===false">{{scope.row.score+" / 100"}}</span>
-                  <input v-model="inputScore" class="inputScore" v-if="scope.row.is_correct === true">
-                  </input>
+                  <input v-model="inputScore" class="inputScore" v-if="scope.row.is_correct === true"></input>
                 </template>
               </el-table-column>
-              <el-table-column label="操作" width="70px" align="right">
+              <el-table-column label="Operation" width="70px" align="right">
                 <template slot-scope="scope">
                   <el-button
                       class="checkReport"
                       type="text"
                       v-if="scope.row.is_correct===false"
                       @click="scope.row.is_correct=true"
-                  >评分
+                  >Mark
                   </el-button>
                   <el-button
                       class="checkReport"
                       type="text"
                       v-if="scope.row.is_correct===true"
                       @click="correctReport(scope.row)"
-                  >确定
+                  >Confirm
                   </el-button>
                 </template>
               </el-table-column>
             </el-table>
           </el-drawer>
         </el-tab-pane>
-        <el-tab-pane label="课程考勤" name="attendance"> </el-tab-pane>
+        <el-tab-pane label="Attendance" name="attendance"> </el-tab-pane>
       </el-tabs>
     </div>
   </div>
@@ -216,7 +215,7 @@ export default {
               submit_time: response.data[i].submit_time,
               report_name: response.data[i].report_name,
               correct_state:
-                response.data[i].correct_time === null ? "未批改" : "已批改",
+                response.data[i].correct_time === null ? "Unmarked" : "Marked",
               score:response.data[i].score,
               is_correct:false
             });

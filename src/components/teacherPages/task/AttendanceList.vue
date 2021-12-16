@@ -8,9 +8,9 @@
         @tab-click="handleClick"
         value="attendance"
       >
-        <el-tab-pane label="发布任务" name="task"> </el-tab-pane>
-        <el-tab-pane label="实验项目" name="project"> </el-tab-pane>
-        <el-tab-pane label="课程考勤" name="attendance">
+        <el-tab-pane label="Release Task" name="task"> </el-tab-pane>
+        <el-tab-pane label="Project" name="project"> </el-tab-pane>
+        <el-tab-pane label="Attendance" name="attendance">
           <div style="height: 480px">
             <el-table
               class="attendTable"
@@ -19,31 +19,31 @@
               :row-style="{ height: '50px' }"
               :cell-style="{ padding: '0' }"
             >
-              <el-table-column label="序号" type="index" width="200px">
+              <el-table-column label="Index" type="index" width="200px">
               </el-table-column>
               <el-table-column
                 prop="start_time"
-                label="开始时间"
+                label="Start Time"
                 width="350px"
                 sortable
               >
               </el-table-column>
               <el-table-column
                 prop="end_time"
-                label="结束时间"
+                label="End Time"
                 width="350px"
                 sortable
               >
               </el-table-column>
               <el-table-column width="150px">
                 <el-button type="text" @click="drawer = true"
-                  >查看详情</el-button
+                  >Details</el-button
                 >
               </el-table-column>
             </el-table>
             <div>
               <el-drawer
-                title="考勤详情"
+                title="Details"
                 :visible.sync="drawer"
                 :direction="direction"
               >

@@ -2,15 +2,15 @@
   <div>
     <div>
       <el-button class="addStudentBtn" @click="writeStudentID">
-        <span>添加学生</span>
+        <span>Add</span>
       </el-button>
       <el-button>
-        <span>导出名单</span>
+        <span>Export</span>
       </el-button>
     </div>
     <div>
       <el-tabs class="studentTab" type="border-card">
-        <el-tab-pane label="课程学生">
+        <el-tab-pane label="Student List">
           <div style="height: 480px">
             <el-table
               class="memberTable"
@@ -19,18 +19,18 @@
               :row-style="{ height: '50px' }"
               :cell-style="{ padding: '0' }"
             >
-              <el-table-column prop="student_ID" label="学号" width="250px">
+              <el-table-column prop="student_ID" label="ID" width="250px">
               </el-table-column>
-              <el-table-column prop="name" label="姓名" width="250px">
+              <el-table-column prop="name" label="Name" width="250px">
               </el-table-column>
-              <el-table-column prop="email" label="邮箱" width="400px">
+              <el-table-column prop="email" label="E-mail" width="400px">
               </el-table-column>
               <el-table-column width="120px">
                 <template slot-scope="scope">
                   <el-button
                     type="text"
                     @click="open(scope.row)"
-                  >删除
+                  >Delete
                   </el-button>
                 </template>
               </el-table-column>
@@ -55,9 +55,9 @@ export default {
   methods: {
     //删除学生的提示，确认后调用api删除学生
     open(row) {
-      this.$confirm("此操作将从课程中删除该学生, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
+      this.$confirm("You are going to delete this student from the course. Sure to continue?", "Tip", {
+        confirmButtonText: "Confirm",
+        cancelButtonText: "Cancel",
         type: "warning",
       })
         .then(() => {
@@ -66,7 +66,7 @@ export default {
         .catch(() => {
           this.$message({
             type: "info",
-            message: "已取消删除",
+            message: "Deletion cancelled",
           });
         });
     },
@@ -90,24 +90,24 @@ export default {
           this.studentList.splice(data, 1);
           this.$message({
             type: "success",
-            message: "删除成功!",
+            message: "Deleted successfully!",
           });
         })
         .catch(() => {
           this.$message({
             type: "error",
-            message: "删除失败!请重试！",
+            message: "Fail to delete! Please try again!",
           });
         });
     },
 
     //填写添加学生的id并检验
     writeStudentID() {
-      this.$prompt("请输入添加学生的学号", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
+      this.$prompt("Please enter the ID", "Tip", {
+        confirmButtonText: "Confirm",
+        cancelButtonText: "Cancel",
         inputPattern: /^\d\d\d\d\d\d\d$/,
-        inputErrorMessage: "学号格式不正确",
+        inputErrorMessage: "Wrong ID!",
       })
         .then(({ value }) => {
           this.addStudent(value);
@@ -115,7 +115,7 @@ export default {
         .catch(() => {
           this.$message({
             type: "info",
-            message: "取消添加",
+            message: "Addition cancelled",
           });
         });
     },
@@ -140,17 +140,17 @@ export default {
             this.loadData();
             this.$message({
               type: "success",
-              message: "添加成功！",
+              message: "Added successfully!",
             });
           } else if (response.data === -1) {
             this.$message({
               type: "error",
-              message: "添加失败！输入学生不存在！",
+              message: "Fail to add! This student does not exist!",
             });
           } else if (response.data === -3) {
             this.$message({
               type: "error",
-              message: "添加失败！该学生已在课程中！",
+              message: "Fail to add! This student has already been in this course!",
             });
           }
         })
@@ -158,7 +158,7 @@ export default {
           console.log(error);
           this.$message({
             type: "error",
-            message: "添加失败！请重试!",
+            message: "Fail to add! Please try again!",
           });
         });
     },

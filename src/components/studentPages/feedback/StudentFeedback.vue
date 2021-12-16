@@ -5,10 +5,10 @@
           class="writeArea"
           type="textarea"
           :rows="2"
-          placeholder="写反馈"
+          placeholder="Input the feedback"
           v-model="textarea">
       </el-input>
-      <el-button type="primary" class="feedbackButton">发表反馈</el-button>
+      <el-button type="primary" class="feedbackButton">Submit</el-button>
       <el-divider></el-divider>
     </div>
 
@@ -48,27 +48,27 @@ export default {
       feedback_list:[
         {
           student_ID:'1951014',
-          name:'阿鸡',
+          name:'Little chicken',
           submit_time:'2021-12-13 22:10:14',
-          content:'老师昨天布置的作业是什么呀？',
+          content:'What is the assignment?',
         },
         {
           student_ID:'1951014',
-          name:'阿鸡',
+          name:'Little chicken',
           submit_time:'2021-12-13 22:10:14',
-          content:'老师昨天布置的作业是什么呀？',
+          content:'What is the assignment??',
         },
         {
           student_ID:'1951014',
-          name:'阿鸡',
+          name:'Little chicken',
           submit_time:'2021-12-13 22:10:14',
-          content:'老师昨天布置的作业是什么呀？',
+          content:'What is the assignment???',
         },
         {
           student_ID:'1951014',
-          name:'阿鸡',
+          name:'Little chicken',
           submit_time:'2021-12-13 22:10:14',
-          content:'老师昨天布置的作业是什么呀？',
+          content:'What is the assignment????',
         }
       ],
     }

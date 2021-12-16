@@ -3,12 +3,12 @@
     <el-tabs class="stuTaskTab" v-model="activeName">
 
       <el-tab-pane name="project">
-        <span slot="label" class="paneName"><i class="el-icon-date"></i> 实验项目</span>
+        <span slot="label" class="paneName"><i class="el-icon-date"></i> Project</span>
         <StudentProject></StudentProject>
       </el-tab-pane>
 
       <el-tab-pane name="attendance">
-        <span slot="label" class="paneName"><i class="el-icon-location-outline"></i> 考勤</span>
+        <span slot="label" class="paneName"><i class="el-icon-location-outline"></i> Attendance</span>
         <StudentAttendance></StudentAttendance>
       </el-tab-pane>
 

@@ -74,7 +74,7 @@ export default {
         series: [
           {
             data: score_list,
-            name: '分数',
+            name: 'Grade',
             type: 'bar',
             barWidth: '60%',
             itemStyle:{

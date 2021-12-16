@@ -3,12 +3,12 @@
     <el-tabs class="stuFileTab" v-model="activeName">
 
       <el-tab-pane name="courseFile">
-        <span slot="label" class="paneName"><i class="el-icon-document"></i> 课程参考资料</span>
+        <span slot="label" class="paneName"><i class="el-icon-document"></i> Course Material</span>
         <CourseFile></CourseFile>
       </el-tab-pane>
 
       <el-tab-pane name="projectFile">
-        <span slot="label" class="paneName"><i class="el-icon-notebook-2"></i> 项目参考资料</span>
+        <span slot="label" class="paneName"><i class="el-icon-notebook-2"></i> Project Material</span>
         <ProjectFile></ProjectFile>
       </el-tab-pane>
     </el-tabs>
