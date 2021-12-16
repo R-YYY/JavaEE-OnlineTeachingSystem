@@ -101,6 +101,7 @@ const routes = [
   {
     path: '/courses/:course_id',
     name: 'CourseHome',
+    redirect:'/courses/:course_id/info',
     component: CourseHome,
     children:[
       {
@@ -178,12 +179,8 @@ const routes = [
     path: '/stu/courseInfo/:course_id',
     name: 'StudentCourseHome',
     component: StudentCourseHome,
-    redirect: '/stu/courseInfo/:course_id/stuTasks',
+    redirect:'/stu/courseInfo/:course_id/stuTasks',
     children: [
-      {
-        path: '',
-        component: StudentTask
-      },
       {
         path: 'stuTasks',
         name: 'stuTasks',

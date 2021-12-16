@@ -133,21 +133,24 @@ export default {
       })
         .then((response) => {
           console.log("传出的" + response.data);
-          if (response.data === "1")
+          if (response.data[0] !== "-1")
             this.$message({
-              type: "error",
-              message: "Fail to login!",
+              type: "success",
+              message: "登录成功",
             });
           else
             this.$message({
-              type: "success",
-              message: "Successful!",
+              type: "error",
+              message: "登录失败",
             });
-          window.sessionStorage.setItem("id", response.data.account_ID);
-          if (window.sessionStorage.getItem("id").length == 5)
+          window.sessionStorage.setItem("account_ID", response.data[0]);
+          window.sessionStorage.setItem("token", response.data[1]);
+          if (window.sessionStorage.getItem("account_ID").length == 5)
             this.$router.push("/teacherhome");
-          else if (window.sessionStorage.getItem("id").length == 6)
+          else if (window.sessionStorage.getItem("account_ID").length == 7)
             this.$router.push("/studenthome");
+          else if (window.sessionStorage.getItem("account_ID").length == 6)
+            this.$router.push("/adminhome");
         })
         .catch(function (error) {
           console.log(error);
