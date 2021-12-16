@@ -10,7 +10,7 @@
         <img
           id="courseImg"
           src="../../../src/assets/course.png"
-          alt="加载失败"
+          alt="Failed"
         />
         <div>
           <!--主页侧边栏选项卡-->
