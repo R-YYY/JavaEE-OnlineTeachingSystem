@@ -305,6 +305,7 @@ export default {
               type: "success",
               message: "Successful！",
             });
+            row.correct_state="Marked"
           } else {
             this.$message({
               type: "error",
