@@ -132,16 +132,23 @@ export default {
         data: data,
       })
         .then((response) => {
-          console.log("传出的" + response.data);
-          if (response.data[0] !== "-1")
+          // console.log("传出的" + response.data);
+          console.log('register')
+          console.log(response.data)
+          if(response.data==''){
+            this.$message({
+              type: "error",
+              message: "Wrong Account or Wrong Password !",
+            });
+          }else if (response.data[0] !== "-1")
             this.$message({
               type: "success",
-              message: "登录成功",
+              message: "Login Successfully !",
             });
           else
             this.$message({
               type: "error",
-              message: "登录失败",
+              message: "Login Failed !",
             });
           window.sessionStorage.setItem("account_ID", response.data[0]);
           window.sessionStorage.setItem("token", response.data[1]);

@@ -7,23 +7,6 @@
     <el-button @click="hh" :style="{display:isShow}">老师课程主页</el-button>
     <el-button @click="studentCourseHome" :style="{display:isShow}">学生课程主页</el-button>
 
-    <!--测试邮箱注册-->
-    <!-- <el-form label-width="70px" style="margin-top: 50px">
-      <el-form-item label="账号" prop="account_ID" style="width: 300px">
-        <el-input v-model="account_ID"></el-input>
-      </el-form-item>
-      <el-form-item label="邮箱" prop="email" style="width: 500px">
-        <el-input style="width: 230px" v-model="email"></el-input>
-        <el-button style="margin-left: 30px" @click="sendEmail">发送验证码</el-button>
-      </el-form-item>
-      <el-form-item label="密码" prop="password" style="width: 300px">
-        <el-input v-model="password"></el-input>
-      </el-form-item>
-      <el-form-item label="验证码" prop="code" style="width: 300px">
-        <el-input v-model="code"></el-input>
-      </el-form-item>
-    </el-form>
-    <el-button style="margin-left: 150px" @click="register">注册</el-button> -->
   </div>
 </template>
 

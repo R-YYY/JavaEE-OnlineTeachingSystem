@@ -8,7 +8,7 @@
       <el-container>
         <img class="courseImg" src="../../../src/assets/course.png" alt="加载失败">
         <span class="courseTitle">
-          {{courseName}}<br>Course ID：{{courseID}}
+          {{course.name}}<br>Course ID：{{courseID}}
         </span>
         <el-container class="timeArea">
           <el-card class="time">{{ parseInt(date.getHours()/10) }}</el-card>
@@ -65,9 +65,6 @@
             <span style="font-size: 20px">Course Information</span>
           </div>
           <div>
-<!--            <p>{{course.course_ID}}</p>-->
-<!--            <P>{{courseID}}</P>-->
-<!--            <p>{{course.name}}</p>-->
             <p>{{course.description}}</p>
           </div>
         </el-card>
@@ -86,9 +83,7 @@ export default {
       student_ID:'1951014',
       activeIndex: '',
       teacher_list:[],
-      course : {
-        description:'',
-      },
+      course : {},
     }
   },
   methods:{
@@ -180,8 +175,8 @@ export default {
 
 <style scoped>
 .pageContainer{
-  /*background-color: whitesmoke;*/
-  background-color: white;
+  background-color: whitesmoke;
+  /*background-color: white;*/
   height:100%;
   overflow:auto
 }
@@ -253,9 +248,7 @@ export default {
 }
 
 .courseInfo{
-  margin-left: 20px;
-  margin-right: 120px;
-  margin-top: 30px;
+  margin: 30px 120px 20px 20px;
 }
 
 .timeArea{

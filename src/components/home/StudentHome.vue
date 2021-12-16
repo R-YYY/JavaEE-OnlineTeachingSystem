@@ -12,9 +12,9 @@
               :default-active="activeIndex"
               class="port_box"
               mode="horizontal"
-              @select="handleSelect"
             >
-              <el-submenu class="sub">
+<!--              @select="handleSelect"-->
+              <el-submenu class="sub" index="1">
                 <template slot="title" class="subtitle">
                   <img src="@/assets/port.png" />
                 </template>
@@ -74,8 +74,10 @@
 export default {
   data() {
     return {
-      name: "刘某某",
+      student_id:window.sessionStorage.getItem("account_ID"),
+      name: "刘",
       count: "0",
+      activeIndex:'1',
     };
   },
   methods: {
@@ -86,6 +88,10 @@ export default {
       this.$router.push("/stuinfoset");
     },
   },
+  mounted() {
+    // console.log(window.sessionStorage.getItem("account_ID"))
+    // console.log(window.sessionStorage.getItem("token"))
+  }
 };
 </script>
 

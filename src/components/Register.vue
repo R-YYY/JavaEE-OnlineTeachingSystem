@@ -308,6 +308,7 @@ export default {
           })
             .then((response) => {
               if (response.data === 1) {
+                // console.log('register'+response.data)
                 this.$message({
                   type: "success",
                   message: "Registered successfully！",

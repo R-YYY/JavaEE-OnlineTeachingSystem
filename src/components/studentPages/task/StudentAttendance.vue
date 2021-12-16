@@ -51,8 +51,29 @@ export default {
         }
     ).then(
         (response)=>{
+          console.log('attend')
           console.log(response.data);
-          that.attendance_list=response.data;
+          // that.attendance_list=response.data;
+          for(var i=0; i<response.data.length; i++){
+            var type='';
+            var real=response.data[i];
+            if(real.attend_type=='出勤'){
+              type='Attended';
+            }
+            else if(real.attend_type=='缺勤'){
+              type='Absent';
+            }else{
+              type='To be recorded';
+            }
+            var obj={
+              attend_type: type,
+              course_ID: real.course_ID,
+              end_time: real.end_time,
+              start_time: real.start_time,
+              student_ID: real.student_ID,
+            }
+            this.attendance_list.push(obj);
+          }
         }
     )
   },
@@ -115,8 +136,9 @@ export default {
   font-size: 18px;
 }
 .success{
-  float: right;
-  margin-right: 120px;
+  width: 100px;
+  text-align: center;
+  margin-right: 110px;
   font-size: 17px;
   color: rgba(50,180,0,0.9);
   border: 1px solid rgba(0,255,0,0.1);
@@ -126,7 +148,8 @@ export default {
 }
 
 .danger{
-  float: right;
+  width: 100px;
+  text-align: center;
   margin-right: 120px;
   font-size: 17px;
   color: red;
@@ -136,7 +159,8 @@ export default {
   background: rgba(255,0,0,0.06);
 }
 .normal{
-  float: right;
+  width: 140px;
+  text-align: center;
   margin-right: 120px;
   font-size: 17px;
   color: rgba(24,207,201,1);
