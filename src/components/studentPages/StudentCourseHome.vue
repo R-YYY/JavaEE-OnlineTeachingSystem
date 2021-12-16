@@ -1,7 +1,7 @@
 <template>
   <el-container class="pageContainer">
     <el-header class="pageHeader">
-      <h1 class="title">Experiment Teaching System</h1>
+      <h1 class="title">Online Teaching System</h1>
     </el-header>
 
     <div class="pageMiddle">
