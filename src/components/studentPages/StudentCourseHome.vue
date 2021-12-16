@@ -38,10 +38,6 @@
         <span>Grade</span>
       </el-menu-item>
 
-      <el-menu-item index="5" class="stuOption" @click="toFeedback">
-        <span>Feedback</span>
-      </el-menu-item>
-
     </el-menu>
 
     <el-container>
@@ -108,9 +104,6 @@ export default {
     toStudent(){
       this.$router.push({name:'stuStudents'})
     },
-    toFeedback(){
-      this.$router.push({name:'stuFeedbacks'})
-    }
   },
   mounted() {
     //刷新时保持侧边栏选中
@@ -131,9 +124,6 @@ export default {
         this.$route.name === "stuGrades"
     ) {
       this.activeIndex = "4";
-    }
-    else if (this.$route.name === "stuFeedbacks") {
-      this.activeIndex = "5";
     }
 
     let _this = this;

@@ -19,7 +19,6 @@ import StudentTask from "@/components/studentPages/task/StudentTask";
 import StudentFile from "@/components/studentPages/file/StudentFile";
 import Student from "@/components/studentPages/student/Student";
 import StudentGrade from "@/components/studentPages/grade/StudentGrade";
-import StudentFeedback from "@/components/studentPages/feedback/StudentFeedback";
 import StudentAttendance from "@/components/studentPages/task/StudentAttendance";
 import StudentProjectInfo from "@/components/studentPages/task/StudentProjectInfo";
 
@@ -219,11 +218,6 @@ const routes = [
         path: 'stuGrades',
         name: 'stuGrades',
         component: StudentGrade
-      },
-      {
-        path: 'stuFeedbacks',
-        name: 'stuFeedbacks',
-        component: StudentFeedback
       },
     ]
   },

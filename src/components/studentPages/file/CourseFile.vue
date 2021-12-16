@@ -88,6 +88,7 @@ export default {
           link.click();
           //释放内存
           window.URL.revokeObjectURL(link.href);
+          // var
         }
       });
     },
