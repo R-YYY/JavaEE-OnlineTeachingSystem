@@ -8,13 +8,11 @@ import ManageTask from "@/components/teacherPages/task/ManageTask";
 import ManageCourse from "@/components/teacherPages/course/ManageCourse";
 import ManageGrade from "@/components/teacherPages/grade/ManageGrade";
 import ManageFile from "@/components/teacherPages/file/ManageFile";
-import Feedback from "@/components/teacherPages/feedback/ManageFeedbacks";
 import EditCourseInfo from "@/components/teacherPages/course/EditCourseInfo";
 import TeacherList from "@/components/teacherPages/course/TeacherList";
 import TAList from "@/components/teacherPages/course/TAList";
 import ProjectList from "@/components/teacherPages/task/ProjectList";
 import AttendanceList from "@/components/teacherPages/task/AttendanceList";
-import SetGrade from "@/components/teacherPages/grade/SetGrade";
 import PartGrade from "@/components/teacherPages/grade/PartGrade";
 import StudentCourseHome from "@/components/studentPages/StudentCourseHome";
 import StudentTask from "@/components/studentPages/task/StudentTask";
@@ -90,11 +88,11 @@ const routes = [
     name:'Register',
     component:Register
   },
-  {
-    path:'/stuinfoset',
-    name:'StudentInfoSet',
-    component:()=>import('@/components/studentPages/StudentInfoSet.vue'),
-  },
+  // {
+  //   path:'/stuinfoset',
+  //   name:'StudentInfoSet',
+  //   component:()=>import('@/components/studentPages/StudentInfoSet.vue'),
+  // },
   {
     path:'/teainfoset',
     name:'TeacherInfoSet',
@@ -159,27 +157,26 @@ const routes = [
         name: 'partGrades',
         component: PartGrade
       },
-      {
-        path: 'setGrades',
-        name: 'setGrades',
-        component: SetGrade
-      },
+      // {
+      //   path: 'setGrades',
+      //   name: 'setGrades',
+      //   component: SetGrade
+      // },
       {
         path: 'files',
         name: 'files',
         component: ManageFile
       },
-      {
-        path: 'feedbacks',
-        name: 'feedbacks',
-        component: Feedback
-      },
+      // {
+      //   path: 'feedbacks',
+      //   name: 'feedbacks',
+      //   component: Feedback
+      // },
     ],
   },
   {
     path: '/stu/courseInfo/:course_id',
     name: 'StudentCourseHome',
-    redirect: '/stu/courseInfo/:course_id/stuTasks',
     component: StudentCourseHome,
     children: [
       {

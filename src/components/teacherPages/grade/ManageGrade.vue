@@ -60,12 +60,28 @@
           </div>
         </el-tab-pane>
         <el-tab-pane label="Single Grade" name="part"></el-tab-pane>
-        <el-tab-pane label="Set Grade Weighting" name="set"></el-tab-pane>
-
         <el-dialog
-        :visible.sync="scoreVisible">
-          <el-table>
-
+            :title="stuName + '的成绩详情'"
+            :visible.sync="scoreVisible">
+          <el-table class="totalTable"
+                    :data="stuScore[0]"
+                    border
+                    show-summary
+                    :summary-method="totalScore1">
+            <el-table-column label="实验名称" prop="name"></el-table-column>
+            <el-table-column label="分数" align="center">
+              <template slot-scope="scope"><span>{{scope.row.score === null?'0/100':scope.row.score+'/100'}}</span></template>
+            </el-table-column>
+          </el-table>
+          <el-table class="totalTable"
+                    :data="stuScore[1]"
+                    border
+                    show-summary
+                    :summary-method="totalScore2">
+            <el-table-column label="考勤时间" prop="name"></el-table-column>
+            <el-table-column label="分数" align="center">
+              <template slot-scope="scope"><span>{{scope.row.score === null?'0/1':'1/1'}}</span></template>
+            </el-table-column>
           </el-table>
         </el-dialog>
       </el-tabs>
@@ -79,18 +95,77 @@ export default {
   data() {
     return {
       totalGradeList: [],
-      scoreVisible:false
+      scoreVisible:false,
+      stuScore:[{
+        name:"",
+        score:""
+      },{
+        name:"",
+        score:""
+      }],
+      stuName:"",
     };
   },
   methods: {
     handleClick(tab) {
       if (tab.index == 0) this.$router.push({ name: "totalGrades" });
       else if (tab.index == 1) this.$router.push({ name: "partGrades" });
-      else if (tab.index == 2) this.$router.push({ name: "setGrades" });
+    },
+
+    totalScore1(param){
+      const { columns, data } = param;
+      const sums = [];
+      columns.forEach((column, index) => {
+        if (index === 0) {
+          sums[index] = '总分';
+        }
+        else{
+          let total = 0
+          for (let i = 0; i < this.stuScore[0].length; i++) {
+            total += this.stuScore[0][i].score === null?0:parseInt(this.stuScore[0][i].score)
+          }
+          sums[index] = total
+        }
+      });
+      return sums;
+    },
+
+    totalScore2(param){
+      const { columns, data } = param;
+      const sums = [];
+      columns.forEach((column, index) => {
+        if (index === 0) {
+          sums[index] = '总分';
+        }
+        else{
+          let total = 0
+          for (let i = 0; i < this.stuScore[1].length; i++) {
+            total += this.stuScore[1][i].score === null?0:1
+          }
+          sums[index] = total
+        }
+      });
+      return sums;
     },
 
     scoreInfo(row){
+      this.stuName = row.name
       this.scoreVisible=true
+      this.$axios({
+        url:"/score/getStuTotalScore",
+        method:"get",
+        params:{
+          course_ID:this.$route.params.course_id,
+          student_ID:row.student_ID
+        },
+        headers: {
+          token:
+              "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+        },
+      }).then((response)=>{
+        console.log(response.data)
+        this.stuScore = response.data
+      })
     }
   },
   mounted() {
@@ -139,5 +214,11 @@ export default {
 .totalGradeTable {
   width: 90%;
   margin-left: 70px;
+}
+
+.totalTable{
+  width: 600px;
+  margin-left: 50px;
+  margin-bottom: 50px;
 }
 </style>

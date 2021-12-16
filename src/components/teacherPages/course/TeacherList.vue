@@ -110,7 +110,14 @@ export default {
               "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
         },
       })
-        .then(() => {
+        .then((response) => {
+          if(response.data === -2){
+            this.$message({
+              type: "error",
+              message: "责任教师不能删除！",
+            })
+            return
+          }
           this.teacherList.splice(data, 1);
           this.$message({
             type: "success",

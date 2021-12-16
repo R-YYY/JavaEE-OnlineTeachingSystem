@@ -100,7 +100,6 @@
             </el-collapse>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="Set Grade Weighting" name="set"></el-tab-pane>
 
         <!--实验分数-->
         <el-drawer
@@ -203,7 +202,6 @@ export default {
     handleClick(tab) {
       if (tab.index == 0) this.$router.push({ name: "totalGrades" });
       else if (tab.index == 1) this.$router.push({ name: "partGrades" });
-      else if (tab.index == 2) this.$router.push({ name: "setGrades" });
     },
 
     checkProject(row){
