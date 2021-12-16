@@ -1,17 +1,21 @@
 <template>
-  <div>
-    <div class="projectCard" v-for="project in project_list">
-      <el-descriptions :title="project.name" :column="2">
-        <template slot="extra">
-          <router-link :to="{path:`/stuProjectInfo`,query:{course_ID: course_id,name: project.name}}" target="_blank">
-            <el-button type="primary" icon="el-icon-edit" plain id="checkButton" size="medium">GO</el-button>
-          </router-link>
-        </template>
-        <el-descriptions-item label="Start Time">{{project.start_time}}</el-descriptions-item>
-        <el-descriptions-item label="Deadline" id="redEndTime">{{project.end_time}}</el-descriptions-item>
-        <el-descriptions-item label="Teacher">{{project.teacher_name}}</el-descriptions-item>
-      </el-descriptions>
-      <el-divider></el-divider>
+  <div id="StudentProject">
+    <div class="box">
+      <div class="inner">
+        <div class="projectCard" v-for="project in project_list">
+          <el-descriptions :title="project.name" :column="2">
+            <template slot="extra">
+              <router-link :to="{path:`/stuProjectInfo`,query:{course_ID: course_id,name: project.name}}" target="_blank">
+                <el-button type="primary" icon="el-icon-edit" plain id="checkButton" size="medium">去完成</el-button>
+              </router-link>
+            </template>
+            <el-descriptions-item label="开始时间">{{project.start_time}}</el-descriptions-item>
+            <el-descriptions-item label="截止时间" id="redEndTime">{{project.end_time}}</el-descriptions-item>
+            <el-descriptions-item label="发布老师">{{project.teacher_name}}</el-descriptions-item>
+          </el-descriptions>
+          <el-divider></el-divider>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -49,6 +53,23 @@ export default {
 </script>
 
 <style scoped>
+#StudentProject{
+  /*border:2px solid black;*/
+  /*height: 400px;*/
+  overflow: hidden;
+}
+.box{
+  width: 800px;
+  height: 400px;
+  /*border: 2px solid red;*/
+  overflow: hidden;
+}
+.inner{
+  width: 815px;
+  height: 380px;
+  overflow: auto;
+  padding-right: 10px;
+}
 .projectCard{
   margin-top: 30px;
   margin-left: 50px;

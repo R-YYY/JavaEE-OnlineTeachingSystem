@@ -3,11 +3,6 @@
     <div id="shape2">
 
     </div>
-<!--    <div class="projectCard" v-for="item in project_list">-->
-<!--      <div>{{item.name}}</div>-->
-<!--      <div>{{item.percentage}}</div>-->
-<!--      <el-divider></el-divider>-->
-<!--    </div>-->
   </div>
 </template>
 
@@ -23,7 +18,10 @@ export default {
       params:{
         course_ID:id,
         student_ID:student_id,
-      }
+      },
+      headers:{
+        token:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+      },
     }).then((response)=>{
       console.log('begin');
       console.log(response.data);

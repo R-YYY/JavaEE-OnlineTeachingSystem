@@ -1,20 +1,20 @@
 <template>
   <div id="StudentGrade">
-    <el-tabs class="stuGradeTab" v-model="activeName" @tab-click="handleClick">
+    <el-tabs class="stuGradeTab" v-model="activeName">
 
       <el-tab-pane name="total">
         <span slot="label" class="paneName"><i class="el-icon-user-solid"></i> Grade Weighting</span>
-        <TotalGrade v-bind:course_id="course_id"></TotalGrade>
+        <TotalGrade></TotalGrade>
       </el-tab-pane>
 
       <el-tab-pane name="project">
         <span slot="label" class="paneName"><i class="el-icon-edit-outline"></i> Project Grade</span>
-        <ProjectGrade v-bind:course_id="course_id"></ProjectGrade>
+        <ProjectGrade></ProjectGrade>
       </el-tab-pane>
 
       <el-tab-pane name="attendance">
         <span slot="label" class="paneName"><i class="el-icon-date"></i> Total Grade</span>
-        <AttendanceGrade v-bind:course_id="course_id"></AttendanceGrade>
+        <AttendanceGrade></AttendanceGrade>
       </el-tab-pane>
     </el-tabs>
   </div>
@@ -30,14 +30,8 @@ export default {
   data(){
     return{
       activeName:'total',
-      course_id: this.$route.params.course_id,
     }
   },
-  methods:{
-    handleClick(tab, event){
-      console.log(tab, event);
-    },
-  }
 }
 </script>
 

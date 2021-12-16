@@ -4,12 +4,12 @@
 
       <el-tab-pane name="normalStudent">
         <span slot="label" class="paneName"><i class="el-icon-user-solid"></i> Student</span>
-        <NormalStudent v-bind:course_id="course_ID"></NormalStudent>
+        <NormalStudent></NormalStudent>
       </el-tab-pane>
 
       <el-tab-pane name="TA">
         <span slot="label" class="paneName"><i class="el-icon-s-custom"></i> Teaching Assistant</span>
-        <TA v-bind:course_id="course_ID"></TA>
+        <TA></TA>
       </el-tab-pane>
     </el-tabs>
   </div>

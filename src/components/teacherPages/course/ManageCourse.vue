@@ -3,13 +3,10 @@
     <div>
       <!--课程管理按钮区域-->
       <el-button class="btn" @click="editCourse">
-        <span>Edit</span>
+        <span>编辑资料</span>
       </el-button>
       <el-button class="btn">
-        <span>End</span>
-      </el-button>
-      <el-button class="btn" type="danger" plain>
-        <span>Delete</span>
+        <span>结束课程</span>
       </el-button>
     </div>
     <div>
@@ -19,7 +16,7 @@
         type="border-card"
         @tab-click="handleClick"
       >
-        <el-tab-pane label="Course Setting">
+        <el-tab-pane label="课程设置">
           <el-container style="height: 480px">
             <!--课程头像-->
             <div class="imgArea">
@@ -31,26 +28,26 @@
             </div>
             <!--课程信息-->
             <div class="infoArea">
-              <h2>Course Information</h2>
-              <el-form label-position="left" label-width="200px" style="width: 480px">
-                <el-form-item label="Course ID">
+              <h2>课程信息</h2>
+              <el-form label-position="left" label-width="80px" style="width: 480px">
+                <el-form-item label="课程编号">
                   <span class="info">{{ this.$route.params.course_id }}</span>
                 </el-form-item>
-                <el-form-item label="Responsible Teacher's ID">
+                <el-form-item label="责任教师">
                   <span class="info">{{ courseTeacherID }}</span>
                 </el-form-item>
-                <el-form-item label="Course Name">
+                <el-form-item label="课程名称">
                   <span class="info">{{ courseName }}</span>
                 </el-form-item>
-                <el-form-item label="Introduction">
+                <el-form-item label="课程介绍">
                   <span class="info">{{ courseDes }}</span>
                 </el-form-item>
               </el-form>
             </div>
           </el-container>
         </el-tab-pane>
-        <el-tab-pane label="Teachers"> </el-tab-pane>
-        <el-tab-pane label="Teaching Assistants"> </el-tab-pane>
+        <el-tab-pane label="教师团队"> </el-tab-pane>
+        <el-tab-pane label="助教团队"> </el-tab-pane>
       </el-tabs>
     </div>
   </div>

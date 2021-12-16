@@ -23,42 +23,51 @@
             >
               <el-table-column
                 prop="student_ID"
-                label="ID"
+                label="学号"
                 width="180px"
                 sortable
               ></el-table-column>
               <el-table-column
                 prop="name"
-                label="Name"
+                label="姓名"
                 width="180px"
                 sortable
               ></el-table-column>
               <el-table-column
                 prop="project_score"
-                label="Experiment Grade"
+                label="实验成绩"
                 width="190px"
                 sortable
               ></el-table-column>
               <el-table-column
                 prop="attend_score"
-                label="Attendance Grade"
+                label="考勤成绩"
                 width="190px"
                 sortable
               ></el-table-column>
               <el-table-column
                 prop="total_score"
-                label="Total Grade"
+                label="总成绩"
                 width="190px"
                 sortable
               ></el-table-column>
               <el-table-column width="140px">
-                <el-button type="text">Details</el-button>
+                <template slot-scope="scope">
+                  <el-button type="text" @click="scoreInfo(scope.row)">查看详情</el-button>
+                </template>
               </el-table-column>
             </el-table>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="Single Grade" name="part"></el-tab-pane>
-        <el-tab-pane label="Set Grade Weighting" name="set"></el-tab-pane>
+        <el-tab-pane label="单项成绩" name="part"></el-tab-pane>
+        <el-tab-pane label="设置成绩权重" name="set"></el-tab-pane>
+
+        <el-dialog
+        :visible.sync="scoreVisible">
+          <el-table>
+
+          </el-table>
+        </el-dialog>
       </el-tabs>
     </div>
   </div>
@@ -70,6 +79,7 @@ export default {
   data() {
     return {
       totalGradeList: [],
+      scoreVisible:false
     };
   },
   methods: {
@@ -78,6 +88,10 @@ export default {
       else if (tab.index == 1) this.$router.push({ name: "partGrades" });
       else if (tab.index == 2) this.$router.push({ name: "setGrades" });
     },
+
+    scoreInfo(row){
+      this.scoreVisible=true
+    }
   },
   mounted() {
     this.$axios({

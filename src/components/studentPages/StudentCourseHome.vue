@@ -45,8 +45,10 @@
     </el-menu>
 
     <el-container>
-      <div class="courseShow" >
-        <router-view></router-view>
+      <div class="courseShow-box">
+        <div class="courseShow" >
+          <router-view></router-view>
+        </div>
       </div>
 
       <div class="courseInfoArea">
@@ -84,7 +86,6 @@ export default {
   data(){
     return {
       date:new Date(),
-      courseName:'Java EE',
       courseID: '42024401',
       student_ID:'1951014',
       activeIndex: '',
@@ -186,7 +187,8 @@ export default {
 
 <style scoped>
 .pageContainer{
-  background-color: whitesmoke;
+  /*background-color: whitesmoke;*/
+  background-color: white;
   height:100%;
   overflow:auto
 }
@@ -241,10 +243,20 @@ export default {
   height: 100%;
   width: 30%
 }
-
-.courseShow{
-  height: 100%;
+.courseShow-box{
   width: 70%;
+  /*width: 850px;*/
+  /*height: 690px;*/
+  /*border:1px solid black;*/
+  /*margin-left: 150px;*/
+  /*overflow: hidden;*/
+}
+.courseShow{
+  /*width: 850px;*/
+  /*height: 650px;*/
+  /*overflow: auto;*/
+  /*margin-left: 20px;*/
+  /*border:1px solid black;*/
 }
 
 .courseInfo{

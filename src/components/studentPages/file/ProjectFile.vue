@@ -45,8 +45,8 @@ export default {
       console.log(val);
     },
     handleDownload(folderName,fileName) {
-      var id=this.course_id;
       var path='/Project Material/'+folderName;
+      var id=this.$route.params.course_id;
       let data = new FormData();
       data.append("course_ID", id);
       data.append("path", path);

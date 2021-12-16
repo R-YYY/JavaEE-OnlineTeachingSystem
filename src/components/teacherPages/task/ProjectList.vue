@@ -55,7 +55,30 @@
           </div>
 
           <!--实验详细信息-->
-          <el-dialog :visible.sync="infoDialogVisible"> </el-dialog>
+          <el-dialog
+              title="实验项目详细信息"
+              :visible.sync="infoDialogVisible">
+            <el-form
+                class="projectInfo"
+                label-width="120px"
+                :model="projectInfo"
+            >
+              <el-form-item label="项目名称">
+                <span>{{projectInfo.name}}</span>
+              </el-form-item>
+              <el-form-item label="开始时间">
+                <span>{{projectInfo.start_time}}</span>
+              </el-form-item>
+              <el-form-item label="结束时间">
+                <span>{{projectInfo.start_time}}</span>
+              </el-form-item>
+              <el-form-item label="项目描述">
+                <span>{{projectInfo.description}}</span>
+              </el-form-item>
+              <el-form-item label="附加文件">
+              </el-form-item>
+            </el-form>
+          </el-dialog>
 
           <!--实验提交情况-->
           <el-drawer
@@ -68,89 +91,124 @@
               <el-input
                 class="searchReport"
                 v-model="input"
-                placeholder="Please enter ID/student name/report name"
+                placeholder="请输入学生学号或姓名或报告名称"
               >
               </el-input>
               <el-button type="primary">
-                <span>Search</span>
+                <span>搜索</span>
               </el-button>
             </div>
             <el-table
-                class="reportTable"
-                :data="reportList"
-                :row-style="{ height: '50px' }"
-                :cell-style="{ padding: '0' }">
+              class="reportTable"
+              :data="reportList"
+              :row-style="{ height: '50px' }"
+              :cell-style="{ padding: '0' }"
+            >
               <el-table-column
-                label="ID"
+                label="学号"
                 prop="student_ID"
-                width="80px"
+                width="100px"
                 sortable
               ></el-table-column>
               <el-table-column
-                label="Name"
+                label="姓名"
                 prop="name"
-                width="80px"
+                width="120px"
                 sortable
               ></el-table-column>
               <el-table-column
-                label="Submission Time"
-                prop="submit_time"
-                sortable
-                width="150px"
-              ></el-table-column>
-              <el-table-column label="Report" sortable width="230px"
+                label="批改状态"
+                prop="submit_state"
+                align="center"
+                width="90px"
+                :filters="[
+                  { text: '已提交', value: '已提交' },
+                  { text: '未提交', value: '未提交' },
+                ]"
+                :filter-method="filterSubmit"
+              >
+                <template slot-scope="scope">
+                  <el-tag
+                    :type="
+                      scope.row.submit_state === '已提交' ? 'success' : 'danger'
+                    "
+                    disable-transitions
+                    >{{ scope.row.submit_state }}</el-tag
+                  >
+                </template>
+              </el-table-column>
+              <el-table-column label="提交报告" sortable width="230px" align="center"
                 ><template slot-scope="scope">
-                <el-tooltip content="Click to download" placement="top">
-                  <a class="reportSrc">{{ scope.row.report_name }}</a>
-                </el-tooltip>
+                  <el-tooltip content="点击下载" placement="top">
+                    <a class="reportSrc" @click="downloadReport(scope.row)">
+                      {{ scope.row.report_name }}</a>
+                  </el-tooltip>
                 </template>
               </el-table-column>
               <el-table-column
-                label="Status"
+                label="批改状态"
                 prop="correct_state"
                 align="center"
                 width="90px"
                 :filters="[
-                  { text: 'Marked', value: 'Marked' },
-                  { text: 'Unmarked', value: 'Unmarked' },
+                  { text: '已批改', value: '已批改' },
+                  { text: '未批改', value: '未批改' },
                 ]"
-                :filter-method="filterState"
+                :filter-method="filterCorrect"
               >
                 <template slot-scope="scope">
                   <el-tag
-                    :type="scope.row.correct_state === 'Marked'? 'success':'danger'"
+                    :type="
+                      scope.row.correct_state === '已批改'
+                        ? 'success'
+                        : 'danger'
+                    "
+                    v-if="scope.row.submit_state === '已提交'"
                     disable-transitions
-                    >{{ scope.row.correct_state }}</el-tag>
+                    >{{ scope.row.correct_state }}</el-tag
+                  >
                 </template>
               </el-table-column>
-              <el-table-column label="Grade" width="85px" align="center" sortable>
+              <el-table-column label="评分" width="85px" align="center">
                 <template slot-scope="scope">
-                  <span v-if="scope.row.is_correct===false">{{scope.row.score+" / 100"}}</span>
-                  <input v-model="inputScore" class="inputScore" v-if="scope.row.is_correct === true"></input>
+                  <span
+                    v-if="
+                      scope.row.is_correct === false &&
+                      scope.row.submit_state === '已提交'
+                    "
+                    >{{ scope.row.score + " / 100" }}</span>
+                  <input
+                      v-model="inputScore"
+                      class="inputScore"
+                      v-if="scope.row.is_correct === true">
+                  </input>
                 </template>
               </el-table-column>
-              <el-table-column label="Operation" width="70px" align="right">
-                <template slot-scope="scope">
+              <el-table-column label="操作" width="70px" align="right">
+                <template
+                  slot-scope="scope"
+                  v-if="scope.row.submit_state === '已提交'"
+                >
                   <el-button
-                      class="checkReport"
-                      type="text"
-                      v-if="scope.row.is_correct===false"
-                      @click="scope.row.is_correct=true"
-                  >Mark
+                    class="checkReport"
+                    type="text"
+                    v-if="scope.row.is_correct === false"
+                    @click="scope.row.is_correct = true"
+                    >评分
                   </el-button>
                   <el-button
-                      class="checkReport"
-                      type="text"
-                      v-if="scope.row.is_correct===true"
-                      @click="correctReport(scope.row)"
-                  >Confirm
+                    class="checkReport"
+                    type="text"
+                    v-if="scope.row.is_correct === true"
+                    @click="correctReport(scope.row)"
+                    >确定
                   </el-button>
                 </template>
               </el-table-column>
             </el-table>
           </el-drawer>
         </el-tab-pane>
-        <el-tab-pane label="Attendance" name="attendance"> </el-tab-pane>
+        <el-tab-pane label="课程考勤" name="attendance"> </el-tab-pane>
       </el-tabs>
     </div>
   </div>
@@ -165,8 +223,15 @@ export default {
       projectList: [],
       tmpList: [],
       reportList: [],
+      projectInfo:{
+        name:"",
+        start_time:"",
+        end_time:"",
+        description:""
+      },
+      projectName: "",
       direction: "ltr",
-      inputScore:"",
+      inputScore: "",
       reportDialogVisible: false,
       infoDialogVisible: false,
     };
@@ -193,6 +258,7 @@ export default {
 
     //查看实验报告
     checkReport(data) {
+      this.projectName = data;
       this.reportList = [];
       this.$axios({
         url: "/report/getTotalReport",
@@ -212,12 +278,13 @@ export default {
             this.reportList.push({
               student_ID: response.data[i].student_ID,
               name: response.data[i].name,
-              submit_time: response.data[i].submit_time,
+              submit_state:
+                response.data[i].submit_time === null ? "未提交" : "已提交",
               report_name: response.data[i].report_name,
               correct_state:
-                response.data[i].correct_time === null ? "Unmarked" : "Marked",
-              score:response.data[i].score,
-              is_correct:false
+                response.data[i].correct_time === null ? "未批改" : "已批改",
+              score: response.data[i].score,
+              is_correct: false,
             });
           }
           // this.reportList = response.data;
@@ -228,24 +295,126 @@ export default {
 
     //查看实验信息
     checkProject(data) {
+      this.projectInfo = {
+        name:"",
+        start_time:"",
+        end_time:"",
+        description:""
+      }
+      this.$axios(({
+        url:"/project/get",
+        method:"get",
+        params:{
+          course_ID:this.$route.params.course_id,
+          name:data
+        },
+        headers: {
+          token:
+              "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+        },
+      })).then((response)=>{
+        console.log(response.data)
+        this.projectInfo = response.data
+      }).catch()
       this.infoDialogVisible = true;
     },
 
-    filterState(value, row) {
+    filterCorrect(value, row) {
       return row.correct_state === value;
     },
 
-    correctReport(row){
-      if(this.inputScore < 0 || this.inputScore > 100 || this.inputScore%1 !== 0)
-        return
-      row.is_correct=false
+    filterSubmit(value, row) {
+      return row.submit_state === value;
+    },
+
+    async correctReport(row) {
+      if (
+        this.inputScore < 0 ||
+        this.inputScore > 100 ||
+        this.inputScore.split(".").length > 1
+      ) {
+        this.$message({
+          type: "error",
+          message: "请输入0-100以内的整数",
+        });
+        return;
+      }
+      let data = new FormData();
+      data.append("course_ID", this.$route.params.course_id);
+      data.append("project_name", this.projectName);
+      data.append("student_ID", row.student_ID);
+      data.append("score", this.inputScore);
+      await this.$axios({
+        url: "/report/correct",
+        method: "post",
+        data: data,
+        headers: {
+          token:
+            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+        },
+      })
+        .then((response) => {
+          if (response.data === 1) {
+            row.score = this.inputScore;
+            this.inputScore = "";
+            this.$message({
+              type: "success",
+              message: "批改成功！",
+            });
+          } else {
+            this.$message({
+              type: "error",
+              message: "批改失败！请重试！",
+            });
+          }
+        })
+        .catch(() => {
+          this.$message({
+            type: "error",
+            message: "批改失败！请重试！",
+          });
+        });
+      row.is_correct = false;
+    },
+
+    downloadReport(row){
       let data = new FormData()
       data.append("course_ID",this.$route.params.course_id)
-      // data.append("project_name",)
+      data.append("project_name",this.projectName)
+      data.append("report_name",row.report_name)
       this.$axios({
-        url:"/report/correct",
+        url:"/file/downloadReport",
         method:"post",
-        data:data
+        data:data,
+        headers: {
+          token:
+              "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+        },
+      }).then((response)=>{
+        let blob = new Blob([response.data]);
+        const disposition = response.headers["content-disposition"];
+        //获得文件名
+        let fileName = disposition.substring(
+            disposition.indexOf("filename=") + 9,
+            disposition.length
+        );
+        //解码
+        fileName = decodeURI(fileName);
+        if (window.navigator.msSaveOrOpenBlob) {
+          navigator.msSaveBlob(blob, fileName);
+        } else {
+          const link = document.createElement("a");
+          link.href = window.URL.createObjectURL(blob);
+          link.download = fileName;
+          link.click();
+          //释放内存
+          window.URL.revokeObjectURL(link.href);
+        }
+      }).catch(()=>{
+        this.$message({
+          type: "error",
+          message: "下载失败！请重试！",
+        });
       })
     }
   },
@@ -335,12 +504,16 @@ export default {
   cursor: pointer;
 }
 
-.checkReport{
+.checkReport {
   margin-left: 20px;
 }
 
-.inputScore{
-  height:25px;
-  width: 60px
+.inputScore {
+  height: 25px;
+  width: 60px;
+}
+
+.projectInfo{
+  /*margin-left: 50px;*/
 }
 </style>

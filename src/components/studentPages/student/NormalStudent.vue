@@ -24,12 +24,6 @@
 <script>
 export default {
   name: "NormalStudent",
-  props:{
-    course_id:{
-      type: String,
-      default: '',
-    },
-  },
   data(){
     return{
       student_list:[],
@@ -37,13 +31,16 @@ export default {
   },
   mounted() {
     let that=this
-    let id = that.course_id
+    let id = this.$route.params.course_id;
     // window.alert(id);
     this.$axios.get(
         '/take/getStudentInfoList',{
           params: {
             course_ID: id,
             is_student: 1,
+          },
+          headers:{
+            token:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
           },
         })
         .then((response)=>{
