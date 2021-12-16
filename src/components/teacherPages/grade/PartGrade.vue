@@ -27,31 +27,31 @@
                     :cell-style="{ padding: '0' }"
                   >
                     <el-table-column
-                      label="实验名称"
+                      label="Name"
                       prop="project_name"
                       width="400px"
                     ></el-table-column>
                     <el-table-column
-                      label="平均分"
+                      label="Average Grade"
                       prop="avg_score"
                       width="150px"
                       sortable
                     ></el-table-column>
                     <el-table-column
-                      label="最低分"
+                      label="Lowest"
                       prop="min_score"
                       width="150px"
                       sortable
                     ></el-table-column>
                     <el-table-column
-                      label="最高分"
+                      label="Highest"
                       prop="max_score"
                       width="150px"
                       sortable
                     ></el-table-column>
                     <el-table-column align="center">
                       <template slot-scope="scope">
-                        <el-button type="text" @click="checkProject(scope.row)">查看详情</el-button>
+                        <el-button type="text" @click="checkProject(scope.row)">Details</el-button>
                       </template>
                     </el-table-column>
                   </el-table>
@@ -61,7 +61,7 @@
               <el-card class="gradeCard">
                 <el-collapse-item>
                   <template slot="title">
-                    <span style="font-size: 20px"><b>考勤</b></span>
+                    <span style="font-size: 20px"><b>Attendance</b></span>
                   </template>
                   <el-table
                       :data="attendanceInfoList"
@@ -70,28 +70,28 @@
                       :cell-style="{ padding: '0' }">
                     <el-table-column
                       type="index"
-                      label="序号"
+                      label="Index"
                       width="150px"
                     ></el-table-column>
                     <el-table-column
                       prop="start_time"
-                      label="开始时间"
+                      label="Start Time"
                       width="250px"
                       sortable
                     ></el-table-column>
                     <el-table-column
                       prop="end_time"
-                      label="结束时间"
+                      label="End Time"
                       width="250px"
                     ></el-table-column>
                     <el-table-column
                       prop="number"
-                      label="考勤人数"
+                      label="Attendance Number"
                       width="200px"
                     ></el-table-column>
                     <el-table-column align="center">
                       <template slot-scope="scope">
-                        <el-button type="text" @click="attendInfo(scope.row)">查看详情</el-button>
+                        <el-button type="text" @click="attendInfo(scope.row)">Details</el-button>
                       </template>
                     </el-table-column>
                   </el-table>
@@ -100,11 +100,11 @@
             </el-collapse>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="设置成绩权重" name="set"></el-tab-pane>
+        <el-tab-pane label="Set Grade Weighting" name="set"></el-tab-pane>
 
         <!--实验分数-->
         <el-drawer
-            :title="'实验名称：' + projectName"
+            :title="'Project Name：' + projectName"
             :visible.sync="scoreVisible"
             :direction="direction"
             size="25%"
@@ -116,19 +116,19 @@
               :cell-style="{ padding: '0' }"
           >
             <el-table-column
-                label="学号"
+                label="ID"
                 prop="student_ID"
                 width="100px"
                 sortable
             ></el-table-column>
             <el-table-column
-                label="姓名"
+                label="Name"
                 prop="name"
                 width="120px"
                 sortable
             ></el-table-column>
             <el-table-column
-                label="评分"
+                label="Grade"
                 prop="score"
                 width="100px"
                 sortable
@@ -138,7 +138,7 @@
 
         <!--考勤信息-->
         <el-drawer
-            :title="'考勤开始时间：'+ this.start_time"
+            :title="'Attendance start time：'+ this.start_time"
             :visible.sync="attendVisible"
             :direction="direction"
             size="30%"
@@ -150,29 +150,29 @@
               :cell-style="{ padding: '0' }"
           >
             <el-table-column
-                label="学号"
+                label="ID"
                 prop="student_ID"
                 width="130px"
                 sortable
             ></el-table-column>
             <el-table-column
-                label="姓名"
+                label="Name"
                 prop="name"
                 width="150px"
                 sortable
             ></el-table-column>
             <el-table-column
-                label="考勤状态"
+                label="Status"
                 prop="attend_state"
                 align="center"
                 width="120px"
                 :filters="[
-                  { text: '出勤', value: '出勤' },
-                  { text: '缺勤', value: '缺勤' },]"
+                  { text: 'Attended', value: 'Attended' },
+                  { text: 'Absent', value: 'Absent' },]"
                 :filter-method="filterAttend">
               <template slot-scope="scope">
                 <el-tag
-                    :type="scope.row.attend_state === '出勤' ? 'success' : 'danger' "
+                    :type="scope.row.attend_state === 'Attended' ? 'success' : 'danger' "
                     disable-transitions>
                   {{ scope.row.attend_state }}</el-tag>
               </template>
@@ -259,7 +259,7 @@ export default {
           this.attendStuList.push({
             "student_ID":response.data[i].student_ID,
             "name":response.data[i].name,
-            "attend_state":response.data[i].attend_type===null?"缺勤":"出勤"
+            "attend_state":response.data[i].attend_type===null?"Absent":"Absent"
           })
         }
       }).catch()

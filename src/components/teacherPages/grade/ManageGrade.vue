@@ -23,44 +23,44 @@
             >
               <el-table-column
                 prop="student_ID"
-                label="学号"
+                label="ID"
                 width="180px"
                 sortable
               ></el-table-column>
               <el-table-column
                 prop="name"
-                label="姓名"
+                label="Name"
                 width="180px"
                 sortable
               ></el-table-column>
               <el-table-column
                 prop="project_score"
-                label="实验成绩"
+                label="Project Grade"
                 width="190px"
                 sortable
               ></el-table-column>
               <el-table-column
                 prop="attend_score"
-                label="考勤成绩"
+                label="Attendance Grade"
                 width="190px"
                 sortable
               ></el-table-column>
               <el-table-column
                 prop="total_score"
-                label="总成绩"
+                label="Total Grade"
                 width="190px"
                 sortable
               ></el-table-column>
               <el-table-column width="140px">
                 <template slot-scope="scope">
-                  <el-button type="text" @click="scoreInfo(scope.row)">查看详情</el-button>
+                  <el-button type="text" @click="scoreInfo(scope.row)">Details</el-button>
                 </template>
               </el-table-column>
             </el-table>
           </div>
         </el-tab-pane>
-        <el-tab-pane label="单项成绩" name="part"></el-tab-pane>
-        <el-tab-pane label="设置成绩权重" name="set"></el-tab-pane>
+        <el-tab-pane label="Single Grade" name="part"></el-tab-pane>
+        <el-tab-pane label="Set Grade Weighting" name="set"></el-tab-pane>
 
         <el-dialog
         :visible.sync="scoreVisible">

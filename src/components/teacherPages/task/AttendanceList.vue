@@ -8,46 +8,46 @@
         @tab-click="handleClick"
         value="attendance"
       >
-        <el-tab-pane label="发布任务" name="task"> </el-tab-pane>
-        <el-tab-pane label="实验项目" name="project"> </el-tab-pane>
-        <el-tab-pane label="课程考勤" name="attendance">
+        <el-tab-pane label="Release Task" name="task"> </el-tab-pane>
+        <el-tab-pane label="Project" name="project"> </el-tab-pane>
+        <el-tab-pane label="Attendance" name="attendance">
           <div style="height: 480px">
             <el-table
               class="attendTable"
               :data="attendList"
               height="480px"
             >
-              <el-table-column label="序号" type="index" width="200px">
+              <el-table-column label="Index" type="index" width="200px">
               </el-table-column>
               <el-table-column
                 prop="start_time"
-                label="开始时间"
+                label="Start Time"
                 width="250px"
                 sortable
               >
               </el-table-column>
               <el-table-column
                 prop="end_time"
-                label="结束时间"
+                label="End Time"
                 width="250px"
                 sortable
               >
               </el-table-column>
               <el-table-column
                   prop="number"
-                  label="考勤人数"
+                  label="Attended Number"
                   width="200px"
               ></el-table-column>
               <el-table-column width="150px">
                 <template slot-scope="scope">
                 <el-button type="text" @click="attendInfo(scope.row)"
-                  >查看详情</el-button>
+                  >Details</el-button>
                 </template>
               </el-table-column>
             </el-table>
             <div>
               <el-drawer
-                :title="'考勤开始时间：'+ this.start_time"
+                :title="'Start time：'+ this.start_time"
                 :visible.sync="drawer"
                 :direction="direction"
                 size="30%"
@@ -59,29 +59,29 @@
                     :cell-style="{ padding: '0' }"
                 >
                   <el-table-column
-                      label="学号"
+                      label="ID"
                       prop="student_ID"
                       width="130px"
                       sortable
                   ></el-table-column>
                   <el-table-column
-                      label="姓名"
+                      label="Name"
                       prop="name"
                       width="150px"
                       sortable
                   ></el-table-column>
                   <el-table-column
-                      label="考勤状态"
+                      label="Status"
                       prop="attend_state"
                       align="center"
                       width="120px"
                       :filters="[
-                  { text: '出勤', value: '出勤' },
-                  { text: '缺勤', value: '缺勤' },]"
+                  { text: 'Attended', value: 'Attended' },
+                  { text: 'Absent', value: 'Absent' },]"
                       :filter-method="filterAttend">
                     <template slot-scope="scope">
                       <el-tag
-                          :type="scope.row.attend_state === '出勤' ? 'success' : 'danger' "
+                          :type="scope.row.attend_state === 'Attended' ? 'success' : 'danger' "
                           disable-transitions>
                         {{ scope.row.attend_state }}</el-tag>
                     </template>
@@ -138,7 +138,7 @@ export default {
           this.attendStuList.push({
             "student_ID":response.data[i].student_ID,
             "name":response.data[i].name,
-            "attend_state":response.data[i].attend_type===null?"缺勤":"出勤"
+            "attend_state":response.data[i].attend_type===null?"Absent":"Attended"
           })
         }
       }).catch()

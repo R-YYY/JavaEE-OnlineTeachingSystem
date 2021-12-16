@@ -42,7 +42,7 @@
                     </div>
                     <div>
                       <el-button class="btn" @click="checkProject(item.name)">
-                        <span>Project Information</span>
+                        <span>Project Details</span>
                       </el-button>
                       <el-button class="btn" @click="checkReport(item.name)">
                         <span>Submissions</span>
@@ -56,26 +56,26 @@
 
           <!--实验详细信息-->
           <el-dialog
-              title="实验项目详细信息"
+              title="Details"
               :visible.sync="infoDialogVisible">
             <el-form
                 class="projectInfo"
                 label-width="120px"
                 :model="projectInfo"
             >
-              <el-form-item label="项目名称">
+              <el-form-item label="Name">
                 <span>{{projectInfo.name}}</span>
               </el-form-item>
-              <el-form-item label="开始时间">
+              <el-form-item label="Start Time">
                 <span>{{projectInfo.start_time}}</span>
               </el-form-item>
-              <el-form-item label="结束时间">
+              <el-form-item label="End Time">
                 <span>{{projectInfo.start_time}}</span>
               </el-form-item>
-              <el-form-item label="项目描述">
+              <el-form-item label="Description">
                 <span>{{projectInfo.description}}</span>
               </el-form-item>
-              <el-form-item label="附加文件">
+              <el-form-item label="File">
               </el-form-item>
             </el-form>
           </el-dialog>
@@ -91,11 +91,11 @@
               <el-input
                 class="searchReport"
                 v-model="input"
-                placeholder="请输入学生学号或姓名或报告名称"
+                placeholder="Please enter ID/student name/report name"
               >
               </el-input>
               <el-button type="primary">
-                <span>搜索</span>
+                <span>Search</span>
               </el-button>
             </div>
             <el-table
@@ -105,76 +105,76 @@
               :cell-style="{ padding: '0' }"
             >
               <el-table-column
-                label="学号"
+                label="ID"
                 prop="student_ID"
                 width="100px"
                 sortable
               ></el-table-column>
               <el-table-column
-                label="姓名"
+                label="Name"
                 prop="name"
                 width="120px"
                 sortable
               ></el-table-column>
               <el-table-column
-                label="批改状态"
+                label="Status"
                 prop="submit_state"
                 align="center"
-                width="90px"
+                width="100px"
                 :filters="[
-                  { text: '已提交', value: '已提交' },
-                  { text: '未提交', value: '未提交' },
+                  { text: 'Submitted', value: 'Submitted' },
+                  { text: 'Unsubmitted', value: 'Unsubmitted' },
                 ]"
                 :filter-method="filterSubmit"
               >
                 <template slot-scope="scope">
                   <el-tag
                     :type="
-                      scope.row.submit_state === '已提交' ? 'success' : 'danger'
+                      scope.row.submit_state === 'Submitted' ? 'success' : 'danger'
                     "
                     disable-transitions
                     >{{ scope.row.submit_state }}</el-tag
                   >
                 </template>
               </el-table-column>
-              <el-table-column label="提交报告" sortable width="230px" align="center"
+              <el-table-column label="Submit Content" sortable width="230px" align="center"
                 ><template slot-scope="scope">
-                  <el-tooltip content="点击下载" placement="top">
+                  <el-tooltip content="Click to download" placement="top">
                     <a class="reportSrc" @click="downloadReport(scope.row)">
                       {{ scope.row.report_name }}</a>
                   </el-tooltip>
                 </template>
               </el-table-column>
               <el-table-column
-                label="批改状态"
+                label="Correction Status"
                 prop="correct_state"
                 align="center"
-                width="90px"
+                width="150px"
                 :filters="[
-                  { text: '已批改', value: '已批改' },
-                  { text: '未批改', value: '未批改' },
+                  { text: 'Marked', value: 'Marked' },
+                  { text: 'Unmarked', value: 'Unmarked' },
                 ]"
                 :filter-method="filterCorrect"
               >
                 <template slot-scope="scope">
                   <el-tag
                     :type="
-                      scope.row.correct_state === '已批改'
+                      scope.row.correct_state === 'Marked'
                         ? 'success'
                         : 'danger'
                     "
-                    v-if="scope.row.submit_state === '已提交'"
+                    v-if="scope.row.submit_state === 'Submitted'"
                     disable-transitions
                     >{{ scope.row.correct_state }}</el-tag
                   >
                 </template>
               </el-table-column>
-              <el-table-column label="评分" width="85px" align="center">
+              <el-table-column label="Grade" width="85px" align="center">
                 <template slot-scope="scope">
                   <span
                     v-if="
                       scope.row.is_correct === false &&
-                      scope.row.submit_state === '已提交'
+                      scope.row.submit_state === 'Submitted'
                     "
                     >{{ scope.row.score + " / 100" }}</span>
                   <input
@@ -184,31 +184,31 @@
                   </input>
                 </template>
               </el-table-column>
-              <el-table-column label="操作" width="70px" align="right">
+              <el-table-column label="Operation" width="90px" align="right">
                 <template
                   slot-scope="scope"
-                  v-if="scope.row.submit_state === '已提交'"
+                  v-if="scope.row.submit_state === 'Submitted'"
                 >
                   <el-button
                     class="checkReport"
                     type="text"
                     v-if="scope.row.is_correct === false"
                     @click="scope.row.is_correct = true"
-                    >评分
+                    >Mark
                   </el-button>
                   <el-button
                     class="checkReport"
                     type="text"
                     v-if="scope.row.is_correct === true"
                     @click="correctReport(scope.row)"
-                    >确定
+                    >Confirm
                   </el-button>
                 </template>
               </el-table-column>
             </el-table>
           </el-drawer>
         </el-tab-pane>
-        <el-tab-pane label="课程考勤" name="attendance"> </el-tab-pane>
+        <el-tab-pane label="Attendance" name="attendance"> </el-tab-pane>
       </el-tabs>
     </div>
   </div>
@@ -279,10 +279,10 @@ export default {
               student_ID: response.data[i].student_ID,
               name: response.data[i].name,
               submit_state:
-                response.data[i].submit_time === null ? "未提交" : "已提交",
+                response.data[i].submit_time === null ? "Unsubmitted" : "Submitted",
               report_name: response.data[i].report_name,
               correct_state:
-                response.data[i].correct_time === null ? "未批改" : "已批改",
+                response.data[i].correct_time === null ? "Unmarked" : "Marked",
               score: response.data[i].score,
               is_correct: false,
             });
@@ -335,7 +335,7 @@ export default {
       ) {
         this.$message({
           type: "error",
-          message: "请输入0-100以内的整数",
+          message: "Please enter an integer(0~100)",
         });
         return;
       }
@@ -359,19 +359,19 @@ export default {
             this.inputScore = "";
             this.$message({
               type: "success",
-              message: "批改成功！",
+              message: "Successful！",
             });
           } else {
             this.$message({
               type: "error",
-              message: "批改失败！请重试！",
+              message: "Fail to mark! Please try again!",
             });
           }
         })
         .catch(() => {
           this.$message({
             type: "error",
-            message: "批改失败！请重试！",
+            message: "Fail to mark! Please try again!",
           });
         });
       row.is_correct = false;
@@ -413,7 +413,7 @@ export default {
       }).catch(()=>{
         this.$message({
           type: "error",
-          message: "下载失败！请重试！",
+          message: "Fail to download! Please try again！",
         });
       })
     }
