@@ -232,7 +232,7 @@ export default {
             "path_number",
             this.projectInfo.fileList.length.toString()
           );
-          this.projectData.append("teacher_ID", "10100");
+          this.projectData.append("teacher_ID", this.store.id);
           //文件和项目信息一起提交
           this.$axios({
             url: "/project/add",
