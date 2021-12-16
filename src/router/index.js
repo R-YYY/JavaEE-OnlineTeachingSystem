@@ -179,6 +179,7 @@ const routes = [
   {
     path: '/stu/courseInfo/:course_id',
     name: 'StudentCourseHome',
+    redirect: '/stu/courseInfo/:course_id/stuTasks',
     component: StudentCourseHome,
     children: [
       {
