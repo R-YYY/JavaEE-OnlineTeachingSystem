@@ -79,13 +79,13 @@
               <el-table-column
                 label="ID"
                 prop="student_ID"
-                width="100px"
+                width="95px"
                 sortable
               ></el-table-column>
               <el-table-column
                 label="Name"
                 prop="name"
-                width="120px"
+                width="110px"
                 sortable
               ></el-table-column>
               <el-table-column
@@ -121,7 +121,7 @@
                 label="Correction Status"
                 prop="correct_state"
                 align="center"
-                width="90px"
+                width="95px"
                 :filters="[
                   { text: 'Marked', value: 'Marked' },
                   { text: 'Unmarked', value: 'Unmarked' },
@@ -141,7 +141,7 @@
                   >
                 </template>
               </el-table-column>
-              <el-table-column label="Grade" width="85px" align="center">
+              <el-table-column label="Grade" width="80px" align="center">
                 <template slot-scope="scope">
                   <span
                     v-if="
@@ -240,8 +240,7 @@ export default {
           project_name: data,
         },
         headers: {
-          token:
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+          token:window.sessionStorage.getItem("token"),
         },
       })
         .then((response) => {
@@ -295,8 +294,7 @@ export default {
         method: "post",
         data: data,
         headers: {
-          token:
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+          token:window.sessionStorage.getItem("token"),
         },
       })
         .then((response) => {
@@ -333,8 +331,7 @@ export default {
         method:"post",
         data:data,
         headers: {
-          token:
-              "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+          token:window.sessionStorage.getItem("token"),
         },
       }).then((response)=>{
         let blob = new Blob([response.data]);
@@ -374,8 +371,7 @@ export default {
         course_ID: this.$route.params.course_id,
       },
       headers: {
-        token:
-          "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+        token:window.sessionStorage.getItem("token"),
       },
     })
       .then((response) => {

@@ -159,8 +159,7 @@ export default {
           student_ID:row.student_ID
         },
         headers: {
-          token:
-              "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+          token:window.sessionStorage.getItem("token"),
         },
       }).then((response)=>{
         console.log(response.data)
@@ -176,8 +175,7 @@ export default {
         course_ID: this.$route.params.course_id,
       },
       headers: {
-        token:
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+        token:window.sessionStorage.getItem("token"),
       },
     })
       .then((response) => {

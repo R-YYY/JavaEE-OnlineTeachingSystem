@@ -215,8 +215,7 @@ export default {
           project_name: row.project_name,
         },
         headers: {
-          token:
-              "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+          token:window.sessionStorage.getItem("token"),
         },
       })
           .then((response) => {
@@ -249,8 +248,7 @@ export default {
           start_time:this.start_time
         },
         headers: {
-          token:
-              "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+          token:window.sessionStorage.getItem("token"),
         },
       }).then((response)=>{
         for (let i = 0; i < response.data.length; i++) {
@@ -273,8 +271,7 @@ export default {
         course_ID: this.$route.params.course_id,
       },
       headers: {
-        token:
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+        token:window.sessionStorage.getItem("token"),
       },
     })
       .then((response) => {
@@ -289,8 +286,7 @@ export default {
         course_ID: this.$route.params.course_id,
       },
       headers: {
-        token:
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+        token:window.sessionStorage.getItem("token"),
       },
     }).then((response) => {
       for (let i = 0; i < response.data.length; i++) {

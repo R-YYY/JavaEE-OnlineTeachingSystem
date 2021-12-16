@@ -19,25 +19,11 @@
         <el-tab-pane label="Course Setting">
           <el-container style="height: 480px">
             <div class="uploadArea">
-              <!--上传课程头像-->
-              <el-upload
-                class="avatar-uploader"
-                action="#"
-                :http-request="uploadPhoto"
-                :before-upload="beforeUpload"
-                :show-file-list="false"
-              >
                 <img
                   src="../../../assets/course.png"
                   alt="加载失败"
                   style="width: 260px"
                 />
-              </el-upload>
-              <!--课程头像上传建议-->
-              <div class="tips">
-                <br /><br /><span></span><br />
-                <span></span>
-              </div>
             </div>
             <div class="editArea">
               <h2>Course Information</h2>
@@ -110,8 +96,7 @@ export default {
         method: "post",
         data:data,
         headers: {
-          token:
-              "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+          token:window.sessionStorage.getItem("token"),
         },
       })
         .then((response) => {
@@ -144,8 +129,7 @@ export default {
         method:"post",
         data:data,
         headers: {
-          token:
-              "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+          token:window.sessionStorage.getItem("token"),
         },
       }).then((response)=>{
         if(response.data === 1){
@@ -195,10 +179,8 @@ export default {
 
 .uploadArea {
   margin-left: 170px;
-  margin-top: 70px;
+  margin-top: 100px;
   margin-right: 100px;
-  font-size: 12px;
-  text-align: center;
 }
 
 .editArea {

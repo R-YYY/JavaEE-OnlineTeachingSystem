@@ -19,7 +19,7 @@
                 style="cursor: pointer"
               >
                 <i class="el-icon-s-cooperation"></i><br />
-                <div class="choice">
+                <div class="choice1">
                   <p>Release Project</p>
                 </div>
               </el-card>
@@ -32,7 +32,7 @@
                 style="cursor: pointer"
               >
                 <i class="el-icon-user-solid"></i><br />
-                <div class="choice">
+                <div class="choice2">
                   <p>Release Attendance Survey</p>
                 </div>
               </el-card>
@@ -54,13 +54,13 @@
           ref="ProjectInfo"
           :rules="projectRules"
           :model="projectInfo"
-          label-width="80px"
+          label-width="100px"
         >
           <el-form-item label="Name" prop="name">
             <el-input
               v-model="projectInfo.name"
               autocomplete="off"
-              style="width: 550px"
+              style="width: 530px"
             ></el-input>
           </el-form-item>
           <el-form-item label="Time" required prop="time">
@@ -72,7 +72,7 @@
               end-placeholder="End Time"
               :default-time="['00:00:00', '23:59:59']"
               value-format="yyyy-MM-dd HH:mm:ss"
-              style="width: 550px"
+              style="width: 530px"
             >
             </el-date-picker>
           </el-form-item>
@@ -82,7 +82,7 @@
               autocomplete="off"
               type="textarea"
               :rows="10"
-              style="width: 550px"
+              style="width: 530px"
             ></el-input>
           </el-form-item>
           <el-form-item label="Add File">
@@ -239,8 +239,7 @@ export default {
             method: "post",
             data: this.projectData,
             headers: {
-              token:
-                "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+              token:window.sessionStorage.getItem("token"),
             },
           })
             .then((response) => {
@@ -289,8 +288,7 @@ export default {
         method: "post",
         data: data,
         headers: {
-          token:
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+          token:window.sessionStorage.getItem("token"),
         },
       })
         .then((response) => {
@@ -334,8 +332,13 @@ export default {
   margin-left: 40px;
 }
 
-.choice {
-  font-size: 25px;
+.choice2 {
+  font-size: 20px;
+  margin-left: 10px;
+}
+
+.choice1 {
+  font-size: 20px;
   margin-left: 55px;
 }
 

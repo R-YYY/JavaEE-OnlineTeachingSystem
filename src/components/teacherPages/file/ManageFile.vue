@@ -130,7 +130,7 @@ export default {
     return {
       input: "",
       courseName: "",
-      filePath: "/Course Materials",
+      filePath: "/课程资料",
       fileList: [],
       totalFiles: [],
       defaultProps: {
@@ -188,8 +188,7 @@ export default {
         method: "post",
         data: data,
         headers: {
-          token:
-              "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+          token:window.sessionStorage.getItem("token"),
         },
       })
         .then((response) => {
@@ -243,8 +242,7 @@ export default {
         method: "post",
         data: data,
         headers: {
-          token:
-              "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+          token:window.sessionStorage.getItem("token"),
         },
       })
         .then((response) => {
@@ -283,8 +281,7 @@ export default {
         method: "post",
         data: data,
         headers: {
-          token:
-              "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+          token:window.sessionStorage.getItem("token"),
         },
         responseType: "blob",
       }).then((response) => {
@@ -321,8 +318,7 @@ export default {
         course_ID: this.$route.params.course_id,
       },
       headers: {
-        token:
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+        token:window.sessionStorage.getItem("token"),
       },
     })
       .then((response) => {
@@ -339,18 +335,17 @@ export default {
         course_ID: this.$route.params.course_id,
       },
       headers: {
-        token:
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+        token:window.sessionStorage.getItem("token"),
       },
     })
       .then((response) => {
         this.totalFiles.push(
           {
-            label: "Course Materials",
+            label: "课程资料",
             children: this.childrenFiles(response.data[0]),
           },
           {
-            label: "Experiment Materials",
+            label: "实验资料",
             children: this.childrenFiles(response.data[1]),
           }
         );
@@ -368,8 +363,7 @@ export default {
         path: this.filePath,
       },
       headers: {
-        token:
-            "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+        token:window.sessionStorage.getItem("token"),
       },
     }).then((response) => {
       this.fileList = response.data;
@@ -386,8 +380,7 @@ export default {
           path: newVal,
         },
         headers: {
-          token:
-              "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+          token:window.sessionStorage.getItem("token"),
         },
       })
         .then((response) => {

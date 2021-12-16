@@ -4,8 +4,8 @@
     <router-view v-if="isRouterAlive" >
 
     </router-view>
-    <el-button @click="hh" :style="{display:isShow}">老师课程主页</el-button>
-    <el-button @click="studentCourseHome" :style="{display:isShow}">学生课程主页</el-button>
+<!--    <el-button @click="hh" :style="{display:isShow}">老师课程主页</el-button>-->
+<!--    <el-button @click="studentCourseHome" :style="{display:isShow}">学生课程主页</el-button>-->
 
   </div>
 </template>
