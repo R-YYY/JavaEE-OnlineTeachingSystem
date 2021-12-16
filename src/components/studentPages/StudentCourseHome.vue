@@ -79,8 +79,8 @@ export default {
   data(){
     return {
       date:new Date(),
-      courseID: '42024401',
-      student_ID:'1951014',
+      courseID: '420244',
+      student_ID:window.sessionStorage.getItem("account_ID"),
       activeIndex: '',
       teacher_list:[],
       course : {},
@@ -101,6 +101,10 @@ export default {
     },
   },
   mounted() {
+    console.log('begin')
+    // console.log(this.$route.params.data)
+    console.log(this.$refs)
+    console.log('end')
     //刷新时保持侧边栏选中
     if (
         this.$route.name === "stuTasks"
@@ -223,7 +227,7 @@ export default {
 
 .stuOption{
   font-size: 18px;
-  width: 150px;
+  width: 190px;
   text-align: center;
 }
 

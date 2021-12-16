@@ -18,9 +18,6 @@
                 <template slot="title" class="subtitle">
                   <img src="@/assets/port.png" />
                 </template>
-                <!-- <el-menu-item index="/stuinfoset">
-                  <i class="el-icon-s-tools"> 账号设置 </i>
-                </el-menu-item> -->
                 <el-menu-item index="/login">
                   <el-button
                       type="text"
@@ -206,23 +203,6 @@ export default {
     this.getEndCourse();
   },
   mounted() {
-    // let _this = this;
-    // let taInfo = new FormData();
-    // taInfo.append("account_ID", account_ID);
-    // this.$axios({
-    //   url: "/course/getTotalCourse",
-    //   method: "get",
-    //   data: taInfo,
-    //   headers: {
-    //     token: window.sessionStorage.getItem("token"),
-    //   },
-    // })
-    //   .then(function (response) {
-    //     _this.cardList = response.data;
-    //   })
-    //   .catch(function (error) {
-    //     console.log("Get Nothing!" + error);
-    //   });
   },
 };
 </script>
