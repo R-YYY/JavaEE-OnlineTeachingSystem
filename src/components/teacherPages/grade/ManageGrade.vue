@@ -3,7 +3,6 @@
     <div>
       <el-input class="inputProject" placeholder="Please enter the student's name"></el-input>
       <el-button>Search</el-button>
-      <el-button>Export</el-button>
     </div>
     <div>
       <el-tabs
@@ -61,15 +60,15 @@
         </el-tab-pane>
         <el-tab-pane label="Single Grade" name="part"></el-tab-pane>
         <el-dialog
-            :title="stuName + '的成绩详情'"
+            :title="stuName + ' Score Information'"
             :visible.sync="scoreVisible">
           <el-table class="totalTable"
                     :data="stuScore[0]"
                     border
                     show-summary
                     :summary-method="totalScore1">
-            <el-table-column label="实验名称" prop="name"></el-table-column>
-            <el-table-column label="分数" align="center">
+            <el-table-column label="Project Name" prop="name"></el-table-column>
+            <el-table-column label="Grade" align="center">
               <template slot-scope="scope"><span>{{scope.row.score === null?'0/100':scope.row.score+'/100'}}</span></template>
             </el-table-column>
           </el-table>
@@ -78,8 +77,8 @@
                     border
                     show-summary
                     :summary-method="totalScore2">
-            <el-table-column label="考勤时间" prop="name"></el-table-column>
-            <el-table-column label="分数" align="center">
+            <el-table-column label="Attendance start time" prop="name"></el-table-column>
+            <el-table-column label="Grade" align="center">
               <template slot-scope="scope"><span>{{scope.row.score === null?'0/1':'1/1'}}</span></template>
             </el-table-column>
           </el-table>
@@ -117,7 +116,7 @@ export default {
       const sums = [];
       columns.forEach((column, index) => {
         if (index === 0) {
-          sums[index] = '总分';
+          sums[index] = 'Total Score';
         }
         else{
           let total = 0
