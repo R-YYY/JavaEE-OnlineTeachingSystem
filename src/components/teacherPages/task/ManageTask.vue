@@ -232,11 +232,7 @@ export default {
           this.projectData.append("description", this.projectInfo.description);
           this.projectData.append("start_time", this.projectInfo.time[0]);
           this.projectData.append("end_time", this.projectInfo.time[1]);
-          this.projectData.append(
-            "path_number",
-            this.projectInfo.fileList.length.toString()
-          );
-          this.projectData.append("teacher_ID", this.store.id);
+          this.projectData.append("teacher_ID", window.sessionStorage.getItem("account_ID"));
           //文件和项目信息一起提交
           this.$axios({
             url: "/project/add",
