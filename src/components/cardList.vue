@@ -132,7 +132,7 @@ export default {
     formore(data){
         console.log(data)
         window.sessionStorage.setItem("Responsible", data.teacher_ID === window.sessionStorage.getItem("account_ID"));
-        if(data.is_student ===1 ) {
+        if(data.is_student === "1" ) {
           this.$router.push({
             name: "StudentCourseHome",
             params: {
