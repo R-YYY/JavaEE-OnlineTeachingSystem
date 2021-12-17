@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <el-button class="btn" @click="writerTaID">
+      <el-button class="btn" @click="writerTaID" :disabled="!judge()">
         <span>Add</span>
       </el-button>
     </div>
@@ -30,6 +30,7 @@
                   <el-button
                     type="text"
                     @click="open(scope.row)"
+                    :disabled="!judge()"
                   >Delete
                   </el-button>
                 </template>
@@ -165,6 +166,10 @@ export default {
             message: "Fail to add! Please try again!",
           });
         });
+    },
+
+    judge(){
+      return window.sessionStorage.getItem("account_ID").length === 5 && window.sessionStorage.getItem("Responsible")
     },
 
     //加载助教列表数据

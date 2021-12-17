@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <el-button class="addStudentBtn" @click="writeStudentID">
+      <el-button class="addStudentBtn" @click="writeStudentID" :disabled="!judge()">
         <span>Add</span>
       </el-button>
     </div>
@@ -27,6 +27,7 @@
                   <el-button
                     type="text"
                     @click="open(scope.row)"
+                    :disabled="!judge()"
                   >Delete
                   </el-button>
                 </template>
@@ -66,6 +67,10 @@ export default {
             message: "Deletion cancelled",
           });
         });
+    },
+
+    judge(){
+      return window.sessionStorage.getItem("account_ID").length === 5 && window.sessionStorage.getItem("Responsible")
     },
 
     //调用api向后端发送删除学生的id

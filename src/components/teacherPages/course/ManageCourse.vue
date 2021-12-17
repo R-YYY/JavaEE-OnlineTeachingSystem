@@ -2,11 +2,8 @@
   <div>
     <div>
       <!--课程管理按钮区域-->
-      <el-button class="btn" @click="editCourse">
+      <el-button class="btn" @click="editCourse" :disabled="!judge()">
         <span>Edit</span>
-      </el-button>
-      <el-button class="btn">
-        <span>End</span>
       </el-button>
     </div>
     <div>
@@ -79,6 +76,9 @@ export default {
           course_des: this.courseDes,
         },
       });
+    },
+    judge(){
+      return window.sessionStorage.getItem("account_ID").length === 5 && window.sessionStorage.getItem("Responsible")
     },
   },
   mounted() {

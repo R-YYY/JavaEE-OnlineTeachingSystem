@@ -11,7 +11,7 @@
         <!--中间的大框框-->
         <el-tab-pane label="Release Task" name="task">
           <el-container style="height: 480px">
-            <div class="typeCard">
+            <div class="typeCard" v-if="judge()">
               <!--发布实验卡片-->
               <el-card
                 shadow="hover"
@@ -184,6 +184,10 @@ export default {
       if (tab.index == 0) this.$router.push({ name: "tasks" });
       else if (tab.index == 1) this.$router.push({ name: "projects" });
       else if (tab.index == 2) this.$router.push({ name: "attendances" });
+    },
+
+    judge(){
+      return window.sessionStorage.getItem("account_ID").length === 5
     },
 
     //文件列表改变

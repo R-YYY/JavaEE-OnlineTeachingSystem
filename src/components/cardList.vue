@@ -10,7 +10,7 @@
         :push=1
       >
         <div style="margin-top:30px">
-          <el-card :body-style="{ padding: '10px'}" shadow="hover" class="box-card" @click.native="formore(item.course_ID)">
+          <el-card :body-style="{ padding: '10px'}" shadow="hover" class="box-card" @click.native="formore(item)">
             <!-- <div class="image-zone">
               <img :src="`http://106.14.45.227:8080/${String(item.pic)}.png`"  weight=70px  height=70px>
                             <img :src="`https://ui-avatars.com/api/?size=60&length=1&bold=true&background=6699CC&color=ffffff&rounded=true&name=`+item.name"  weight=70px  height=70px>
@@ -131,12 +131,23 @@ export default {
     },
     formore(data){
         console.log(data)
-        this.$router.push({
+        window.sessionStorage.setItem("Responsible", data.teacher_ID === window.sessionStorage.getItem("account_ID"));
+        if(data.is_student ===1 ) {
+          this.$router.push({
             name: "StudentCourseHome",
             params: {
-              course_id: data,
+              course_id: data.course_ID,
             },
           });
+        }
+        else{
+          this.$router.push({
+            name: "CourseHome",
+            params: {
+              course_id: data.course_ID,
+            },
+          });
+        }
     }
   },
   watch: {
