@@ -79,7 +79,7 @@ export default {
   data(){
     return {
       date:new Date(),
-      courseID: '420244',
+      courseID: this.$route.params.course_id,
       student_ID:window.sessionStorage.getItem("account_ID"),
       activeIndex: '',
       teacher_list:[],

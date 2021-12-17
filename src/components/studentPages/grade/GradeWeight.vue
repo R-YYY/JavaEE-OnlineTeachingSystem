@@ -21,7 +21,10 @@ export default {
         '/course/get',{
           params:{
             course_ID:id,
-          }
+          },
+          headers:{
+            token:"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMjM0NTY3In0.rrlord8uupqmlJXvDW6Ha1sGfp5te8ICtSrlaDe1f6o",
+          },
         }
     ).then((response)=>{
       var a_percentage=100*response.data.attend_percentage;

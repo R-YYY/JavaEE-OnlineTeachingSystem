@@ -32,7 +32,7 @@ export default {
       for(var i=0; i<list.length; i++){
         console.log(i);
         name_list.push(list[i].name);
-        if(list[i].score==null){
+        if(list[i].score == null){
           score_list.push(0);
         }
         else{

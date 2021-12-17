@@ -175,10 +175,6 @@ export default {
     },
 
     handleUpload(file) {
-      this.$message({
-        type: "danger",
-        message: file.file.name + " Upload？",
-      });
       let data = new FormData();
       data.append("course_ID", this.$route.params.course_id);
       data.append("path", this.filePath);

@@ -226,6 +226,7 @@ export default {
         if (valid) {
           //添加文件列表
           this.$refs["projectUploadFile"].submit();
+          console.log(window.sessionStorage.getItem("account_ID"))
           //添加项目描述信息
           this.projectData.append("course_ID", this.$route.params.course_id);
           this.projectData.append("name", this.projectInfo.name);
