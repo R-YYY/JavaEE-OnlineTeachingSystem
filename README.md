@@ -1,2 +1,2 @@
-# Software Engineering Course Design
-Software engineering course design -- Experiment Teaching System
+# JAVAEE Course Project
+JAVAEE Course Project -- Online Teaching System
